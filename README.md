@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+
 This is Python version 3.10.0 alpha 1
 =====================================
 
