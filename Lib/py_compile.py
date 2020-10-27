@@ -173,6 +173,7 @@ def compile(file, cfile=None, dfile=None, doraise=False, optimize=-1,
     return cfile
 
 
+<<<<<<< HEAD
 def main():
     import argparse
 
@@ -207,6 +208,45 @@ def main():
             else:
                 parser.exit(1, str(error))
 
+=======
+def main(args=None):
+    """Compile several source files.
+
+    The files named in 'args' (or on the command line, if 'args' is
+    not specified) are compiled and the resulting bytecode is cached
+    in the normal manner.  This function does not search a directory
+    structure to locate source files; it only compiles files named
+    explicitly.  If '-' is the only parameter in args, the list of
+    files is taken from standard input.
+
+    """
+    if args is None:
+        args = sys.argv[1:]
+    rv = 0
+    if args == ['-']:
+        while True:
+            filename = sys.stdin.readline()
+            if not filename:
+                break
+            filename = filename.rstrip('\n')
+            try:
+                compile(filename, doraise=True)
+            except PyCompileError as error:
+                rv = 1
+                sys.stderr.write("%s\n" % error.msg)
+            except OSError as error:
+                rv = 1
+                sys.stderr.write("%s\n" % error)
+    else:
+        for filename in args:
+            try:
+                compile(filename, doraise=True)
+            except PyCompileError as error:
+                # return value to indicate at least one failure
+                rv = 1
+                sys.stderr.write("%s\n" % error.msg)
+    return rv
+>>>>>>> 3.9
 
 if __name__ == "__main__":
     main()

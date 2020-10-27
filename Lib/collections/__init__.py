@@ -27,6 +27,10 @@ __all__ = [
 ]
 
 import _collections_abc
+<<<<<<< HEAD
+=======
+import heapq as _heapq
+>>>>>>> 3.9
 import sys as _sys
 
 from itertools import chain as _chain

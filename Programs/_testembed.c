@@ -671,6 +671,10 @@ static void set_most_env_vars(void)
     putenv("PYTHONNOUSERSITE=1");
     putenv("PYTHONFAULTHANDLER=1");
     putenv("PYTHONIOENCODING=iso8859-1:replace");
+<<<<<<< HEAD
+=======
+    putenv("PYTHONOLDPARSER=1");
+>>>>>>> 3.9
     putenv("PYTHONPLATLIBDIR=env_platlibdir");
 }
 

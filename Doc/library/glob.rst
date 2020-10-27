@@ -46,6 +46,7 @@ For example, ``'[?]'`` matches the character ``'?'``.
    results are sorted depends on the file system.  If a file that satisfies
    conditions is removed or added during the call of this function, whether
    a path name for that file be included is unspecified.
+<<<<<<< HEAD
 
    If *root_dir* is not ``None``, it should be a :term:`path-like object`
    specifying the root directory for searching.  It has the same effect on
@@ -55,6 +56,8 @@ For example, ``'[?]'`` matches the character ``'?'``.
 
    This function can support :ref:`paths relative to directory descriptors
    <dir_fd>` with the *dir_fd* parameter.
+=======
+>>>>>>> 3.9
 
    .. index::
       single: **; in glob-style wildcards

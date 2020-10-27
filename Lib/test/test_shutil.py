@@ -1861,7 +1861,11 @@ class TestWhich(BaseTest, unittest.TestCase):
         program = os.path.basename(temp_filexyz.name)
         program = os.path.splitext(program)[0]
 
+<<<<<<< HEAD
         with os_helper.EnvironmentVarGuard() as env:
+=======
+        with support.EnvironmentVarGuard() as env:
+>>>>>>> 3.9
             env['PATHEXT'] = f"{ext};"  # note the ;
             rv = shutil.which(program, path=self.temp_dir)
             self.assertEqual(rv, temp_filexyz.name)

@@ -528,6 +528,10 @@ class TestBuglets(unittest.TestCase):
                 raise Exception
             except Exception or Exception:
                 pass
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3.9
 
 if __name__ == "__main__":
     unittest.main()

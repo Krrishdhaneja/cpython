@@ -71,7 +71,11 @@ class MimeTypesTestCase(unittest.TestCase):
         # bpo-41048: read_mime_types should read the rule file with 'utf-8' encoding.
         # Not with locale encoding. _bootlocale has been imported because io.open(...)
         # uses it.
+<<<<<<< HEAD
         with os_helper.temp_dir() as directory:
+=======
+        with support.temp_dir() as directory:
+>>>>>>> 3.9
             data = "application/no-mans-land  Fran\u00E7ais"
             file = pathlib.Path(directory, "sample.mimetype")
             file.write_text(data, encoding='utf-8')

@@ -49,6 +49,7 @@ class BaseTest(unittest.TestCase):
     """Test basics."""
 
     def test_subscriptable(self):
+<<<<<<< HEAD
         types = [type, tuple, list, dict, set, frozenset, enumerate,
                  defaultdict, deque,
                  SequenceMatcher,
@@ -87,6 +88,45 @@ class BaseTest(unittest.TestCase):
         if ctypes is not None:
             types.extend((ctypes.Array, ctypes.LibraryLoader))
         for t in types:
+=======
+        for t in (type, tuple, list, dict, set, frozenset, enumerate,
+                  defaultdict, deque,
+                  SequenceMatcher,
+                  dircmp,
+                  FileInput,
+                  OrderedDict, Counter, UserDict, UserList,
+                  Pattern, Match,
+                  partial, partialmethod, cached_property,
+                  AbstractContextManager, AbstractAsyncContextManager,
+                  Awaitable, Coroutine,
+                  AsyncIterable, AsyncIterator,
+                  AsyncGenerator, Generator,
+                  Iterable, Iterator,
+                  Reversible,
+                  Container, Collection,
+                  Callable,
+                  Mailbox, _PartialFile,
+                  ContextVar, Token,
+                  Field,
+                  Set, MutableSet,
+                  Mapping, MutableMapping, MappingView,
+                  KeysView, ItemsView, ValuesView,
+                  Sequence, MutableSequence,
+                  MappingProxyType, AsyncGeneratorType,
+                  DirEntry,
+                  chain,
+                  TemporaryDirectory, SpooledTemporaryFile,
+                  Queue, SimpleQueue,
+                  _AssertRaisesContext,
+                  Array, LibraryLoader,
+                  SplitResult, ParseResult,
+                  ValueProxy, ApplyResult,
+                  WeakSet, ReferenceType, ref,
+                  ShareableList, MPSimpleQueue,
+                  Future, _WorkItem,
+                  Morsel,
+                  ):
+>>>>>>> 3.9
             if t is None:
                 continue
             tname = t.__name__

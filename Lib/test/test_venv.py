@@ -15,8 +15,14 @@ import subprocess
 import sys
 import tempfile
 from test.support import (captured_stdout, captured_stderr, requires_zlib,
+<<<<<<< HEAD
                           skip_if_broken_multiprocessing_synchronize)
 from test.support.os_helper import (can_symlink, EnvironmentVarGuard, rmtree)
+=======
+                          can_symlink, EnvironmentVarGuard, rmtree,
+                          import_module,
+                          skip_if_broken_multiprocessing_synchronize)
+>>>>>>> 3.9
 import unittest
 import venv
 from unittest.mock import patch

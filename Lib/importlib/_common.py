@@ -25,6 +25,7 @@ def normalize_path(path):
 
     If the resulting string contains path separators, an exception is raised.
     """
+<<<<<<< HEAD
     str_path = str(path)
     parent, file_name = os.path.split(str_path)
     if parent:
@@ -47,6 +48,9 @@ def get_resource_reader(package):
     if reader is None:
         return None
     return reader(spec.name)
+=======
+    return fallback_resources(package.__spec__)
+>>>>>>> 3.9
 
 
 def resolve(cand):

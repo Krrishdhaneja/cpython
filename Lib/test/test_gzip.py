@@ -367,7 +367,11 @@ class TestGzip(BaseTest):
             self.assertEqual(isizeBytes, struct.pack('<i', len(data1)))
 
     def test_metadata_ascii_name(self):
+<<<<<<< HEAD
         self.filename = os_helper.TESTFN_ASCII
+=======
+        self.filename = support.TESTFN_ASCII
+>>>>>>> 3.9
         self.test_metadata()
 
     def test_compresslevel_metadata(self):

@@ -204,10 +204,7 @@ extern "C" {
 #  define OVERALLOCATE_FACTOR 4
 #endif
 
-/* bpo-40521: Interned strings are shared by all interpreters. */
-#ifndef EXPERIMENTAL_ISOLATED_SUBINTERPRETERS
-#  define INTERNED_STRINGS
-#endif
+#define INTERNED_STRINGS
 
 /* This dictionary holds all interned unicode strings.  Note that references
    to strings in this dictionary are *not* counted in the string's ob_refcnt.
@@ -304,6 +301,17 @@ unicode_decode_utf8(const char *s, Py_ssize_t size,
 /* List of static strings. */
 static _Py_Identifier *static_strings = NULL;
 
+<<<<<<< HEAD
+=======
+#define LATIN1_SINGLETONS
+
+#ifdef LATIN1_SINGLETONS
+/* Single character Unicode strings in the Latin-1 range are being
+   shared as well. */
+static PyObject *unicode_latin1[256] = {NULL};
+#endif
+
+>>>>>>> 3.9
 /* Fast detection of the most frequent whitespace characters */
 const unsigned char _Py_ascii_whitespace[] = {
     0, 0, 0, 0, 0, 0, 0, 0,
@@ -973,8 +981,11 @@ _Py_COMP_DIAG_IGNORE_DEPR_DECLS
 #include "stringlib/find.h"
 #include "stringlib/undef.h"
 _Py_COMP_DIAG_POP
+<<<<<<< HEAD
 
 #undef STRINGLIB_GET_EMPTY
+=======
+>>>>>>> 3.9
 
 /* --- Unicode Object ----------------------------------------------------- */
 
@@ -16016,6 +16027,130 @@ unicode_iter(PyObject *seq)
     return (PyObject *)it;
 }
 
+<<<<<<< HEAD
+=======
+
+size_t
+Py_UNICODE_strlen(const Py_UNICODE *u)
+{
+    return wcslen(u);
+}
+
+Py_UNICODE*
+Py_UNICODE_strcpy(Py_UNICODE *s1, const Py_UNICODE *s2)
+{
+    Py_UNICODE *u = s1;
+    while ((*u++ = *s2++));
+    return s1;
+}
+
+Py_UNICODE*
+Py_UNICODE_strncpy(Py_UNICODE *s1, const Py_UNICODE *s2, size_t n)
+{
+    Py_UNICODE *u = s1;
+    while ((*u++ = *s2++))
+        if (n-- == 0)
+            break;
+    return s1;
+}
+
+Py_UNICODE*
+Py_UNICODE_strcat(Py_UNICODE *s1, const Py_UNICODE *s2)
+{
+    Py_UNICODE *u1 = s1;
+    u1 += wcslen(u1);
+    while ((*u1++ = *s2++));
+    return s1;
+}
+
+int
+Py_UNICODE_strcmp(const Py_UNICODE *s1, const Py_UNICODE *s2)
+{
+    while (*s1 && *s2 && *s1 == *s2)
+        s1++, s2++;
+    if (*s1 && *s2)
+        return (*s1 < *s2) ? -1 : +1;
+    if (*s1)
+        return 1;
+    if (*s2)
+        return -1;
+    return 0;
+}
+
+int
+Py_UNICODE_strncmp(const Py_UNICODE *s1, const Py_UNICODE *s2, size_t n)
+{
+    Py_UNICODE u1, u2;
+    for (; n != 0; n--) {
+        u1 = *s1;
+        u2 = *s2;
+        if (u1 != u2)
+            return (u1 < u2) ? -1 : +1;
+        if (u1 == '\0')
+            return 0;
+        s1++;
+        s2++;
+    }
+    return 0;
+}
+
+Py_UNICODE*
+Py_UNICODE_strchr(const Py_UNICODE *s, Py_UNICODE c)
+{
+    const Py_UNICODE *p;
+    for (p = s; *p; p++)
+        if (*p == c)
+            return (Py_UNICODE*)p;
+    return NULL;
+}
+
+Py_UNICODE*
+Py_UNICODE_strrchr(const Py_UNICODE *s, Py_UNICODE c)
+{
+    const Py_UNICODE *p;
+    p = s + wcslen(s);
+    while (p != s) {
+        p--;
+        if (*p == c)
+            return (Py_UNICODE*)p;
+    }
+    return NULL;
+}
+
+Py_UNICODE*
+PyUnicode_AsUnicodeCopy(PyObject *unicode)
+{
+    Py_UNICODE *u, *copy;
+    Py_ssize_t len, size;
+
+    if (!PyUnicode_Check(unicode)) {
+        PyErr_BadArgument();
+        return NULL;
+    }
+_Py_COMP_DIAG_PUSH
+_Py_COMP_DIAG_IGNORE_DEPR_DECLS
+    u = PyUnicode_AsUnicodeAndSize(unicode, &len);
+_Py_COMP_DIAG_POP
+    if (u == NULL)
+        return NULL;
+    /* Ensure we won't overflow the size. */
+    if (len > ((PY_SSIZE_T_MAX / (Py_ssize_t)sizeof(Py_UNICODE)) - 1)) {
+        PyErr_NoMemory();
+        return NULL;
+    }
+    size = len + 1; /* copy the null character */
+    size *= sizeof(Py_UNICODE);
+    copy = PyMem_Malloc(size);
+    if (copy == NULL) {
+        PyErr_NoMemory();
+        return NULL;
+    }
+    memcpy(copy, u, size);
+    return copy;
+}
+
+
+>>>>>>> 3.9
 static int
 encode_wstr_utf8(wchar_t *wstr, char **str, const char *name)
 {

@@ -27,8 +27,11 @@ import test.support
 import test.support.script_helper
 from test import support
 from test.support import hashlib_helper
+<<<<<<< HEAD
 from test.support import import_helper
 from test.support import os_helper
+=======
+>>>>>>> 3.9
 from test.support import socket_helper
 from test.support import threading_helper
 from test.support import warnings_helper

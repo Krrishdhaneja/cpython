@@ -14,6 +14,16 @@ class tuple "PyTupleObject *" "&PyTuple_Type"
 
 #include "clinic/tupleobject.c.h"
 
+<<<<<<< HEAD
+=======
+/* Speed optimization to avoid frequent malloc/free of small tuples */
+#ifndef PyTuple_MAXSAVESIZE
+#define PyTuple_MAXSAVESIZE     20  /* Largest tuple to save on free list */
+#endif
+#ifndef PyTuple_MAXFREELIST
+#define PyTuple_MAXFREELIST  2000  /* Maximum number of tuples of each size to save */
+#endif
+>>>>>>> 3.9
 
 #if PyTuple_MAXSAVESIZE > 0
 static struct _Py_tuple_state *

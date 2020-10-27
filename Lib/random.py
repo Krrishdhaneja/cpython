@@ -48,7 +48,11 @@ General notes on the underlying Mersenne Twister core generator:
 from warnings import warn as _warn
 from math import log as _log, exp as _exp, pi as _pi, e as _e, ceil as _ceil
 from math import sqrt as _sqrt, acos as _acos, cos as _cos, sin as _sin
+<<<<<<< HEAD
 from math import tau as TWOPI, floor as _floor, isfinite as _isfinite
+=======
+from math import tau as TWOPI, floor as _floor
+>>>>>>> 3.9
 from os import urandom as _urandom
 from _collections_abc import Set as _Set, Sequence as _Sequence
 from itertools import accumulate as _accumulate, repeat as _repeat
@@ -546,6 +550,7 @@ class Random(_random.Random):
             if zz <= -_log(u2):
                 break
         return mu + z * sigma
+<<<<<<< HEAD
 
     def gauss(self, mu, sigma):
         """Gaussian distribution.
@@ -583,6 +588,45 @@ class Random(_random.Random):
             z = _cos(x2pi) * g2rad
             self.gauss_next = _sin(x2pi) * g2rad
 
+=======
+
+    def gauss(self, mu, sigma):
+        """Gaussian distribution.
+
+        mu is the mean, and sigma is the standard deviation.  This is
+        slightly faster than the normalvariate() function.
+
+        Not thread-safe without a lock around calls.
+
+        """
+        # When x and y are two variables from [0, 1), uniformly
+        # distributed, then
+        #
+        #    cos(2*pi*x)*sqrt(-2*log(1-y))
+        #    sin(2*pi*x)*sqrt(-2*log(1-y))
+        #
+        # are two *independent* variables with normal distribution
+        # (mu = 0, sigma = 1).
+        # (Lambert Meertens)
+        # (corrected version; bug discovered by Mike Miller, fixed by LM)
+
+        # Multithreading note: When two threads call this function
+        # simultaneously, it is possible that they will receive the
+        # same return value.  The window is very small though.  To
+        # avoid this, you have to use a lock around all calls.  (I
+        # didn't want to slow this down in the serial case by using a
+        # lock here.)
+
+        random = self.random
+        z = self.gauss_next
+        self.gauss_next = None
+        if z is None:
+            x2pi = random() * TWOPI
+            g2rad = _sqrt(-2.0 * _log(1.0 - random()))
+            z = _cos(x2pi) * g2rad
+            self.gauss_next = _sin(x2pi) * g2rad
+
+>>>>>>> 3.9
         return mu + z * sigma
 
     def lognormvariate(self, mu, sigma):
@@ -751,7 +795,11 @@ class Random(_random.Random):
         # Jain, pg. 495
 
         u = 1.0 - self.random()
+<<<<<<< HEAD
         return u ** (-1.0 / alpha)
+=======
+        return 1.0 / u ** (1.0 / alpha)
+>>>>>>> 3.9
 
     def weibullvariate(self, alpha, beta):
         """Weibull distribution.

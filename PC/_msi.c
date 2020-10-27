@@ -1053,10 +1053,21 @@ _msi_Database_OpenView_impl(msiobj *self, const Py_UNICODE *sql)
 /*[clinic end generated code: output=e712e6a11229abfd input=50f1771f37e500df]*/
 {
     int status;
+<<<<<<< HEAD
     MSIHANDLE hView;
     msiobj *result;
 
     if ((status = MsiDatabaseOpenViewW(self->h, sql, &hView)) != ERROR_SUCCESS)
+=======
+    const wchar_t *sql;
+    MSIHANDLE hView;
+    msiobj *result;
+
+    if (!PyArg_ParseTuple(args, "u:OpenView", &sql))
+        return NULL;
+
+    if ((status = MsiDatabaseOpenViewW(msidb->h, sql, &hView)) != ERROR_SUCCESS)
+>>>>>>> 3.9
         return msierror(status);
 
     result = PyObject_New(struct msiobj, &msiview_Type);
@@ -1197,9 +1208,18 @@ _msi_OpenDatabase_impl(PyObject *module, const Py_UNICODE *path, int persist)
 /*[clinic end generated code: output=d34b7202b745de05 input=1300f3b97659559b]*/
 {
     int status;
+<<<<<<< HEAD
     MSIHANDLE h;
     msiobj *result;
 
+=======
+    const wchar_t *path;
+    int persist;
+    MSIHANDLE h;
+    msiobj *result;
+    if (!PyArg_ParseTuple(args, "ui:MSIOpenDatabase", &path, &persist))
+        return NULL;
+>>>>>>> 3.9
     /* We need to validate that persist is a valid MSIDBOPEN_* value. Otherwise,
        MsiOpenDatabase may treat the value as a pointer, leading to unexpected
        behavior. */

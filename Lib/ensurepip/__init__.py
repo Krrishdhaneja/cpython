@@ -13,7 +13,11 @@ from . import _bundled
 __all__ = ["version", "bootstrap"]
 
 
+<<<<<<< HEAD
 _SETUPTOOLS_VERSION = "47.1.0"
+=======
+_SETUPTOOLS_VERSION = "49.2.1"
+>>>>>>> 3.9
 
 _PIP_VERSION = "20.2.3"
 

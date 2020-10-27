@@ -24,8 +24,14 @@ except ImportError:
 from test import support
 from test.support import os_helper
 from test.support import (
+<<<<<<< HEAD
     TestFailed, run_with_locale, no_tracing,
     _2G, _4G, bigmemtest
+=======
+    TestFailed, TESTFN, run_with_locale, no_tracing,
+    _2G, _4G, bigmemtest, reap_threads, forget,
+    save_restore_warnings_filters
+>>>>>>> 3.9
     )
 from test.support.import_helper import forget
 from test.support.os_helper import TESTFN

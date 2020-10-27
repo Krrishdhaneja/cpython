@@ -718,6 +718,11 @@ Extension modules can continue using them, as they will not be removed in Python
       Part of the old-style Unicode API, please migrate to using
       :c:func:`PyUnicode_AsUCS4`, :c:func:`PyUnicode_AsWideChar`,
       :c:func:`PyUnicode_ReadChar` or similar new APIs.
+<<<<<<< HEAD
+=======
+
+   .. deprecated-removed:: 3.3 3.10
+>>>>>>> 3.9
 
 
 .. c:function:: PyObject* PyUnicode_TransformDecimalToASCII(Py_UNICODE *s, Py_ssize_t size)
@@ -741,6 +746,23 @@ Extension modules can continue using them, as they will not be removed in Python
       Part of the old-style Unicode API, please migrate to using
       :c:func:`PyUnicode_AsUCS4`, :c:func:`PyUnicode_AsWideChar`,
       :c:func:`PyUnicode_ReadChar` or similar new APIs.
+<<<<<<< HEAD
+=======
+
+
+.. c:function:: Py_UNICODE* PyUnicode_AsUnicodeCopy(PyObject *unicode)
+
+   Create a copy of a Unicode string ending with a null code point. Return ``NULL``
+   and raise a :exc:`MemoryError` exception on memory allocation failure,
+   otherwise return a new allocated buffer (use :c:func:`PyMem_Free` to free
+   the buffer). Note that the resulting :c:type:`Py_UNICODE*` string may
+   contain embedded null code points, which would cause the string to be
+   truncated when used in most C functions.
+
+   .. versionadded:: 3.2
+
+   Please migrate to using :c:func:`PyUnicode_AsUCS4Copy` or similar new APIs.
+>>>>>>> 3.9
 
 
 .. c:function:: Py_ssize_t PyUnicode_GetSize(PyObject *unicode)

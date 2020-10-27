@@ -10,7 +10,11 @@ import tempfile
 import unittest
 
 from test import support
+<<<<<<< HEAD
 from test.support import os_helper, script_helper
+=======
+from test.support import script_helper
+>>>>>>> 3.9
 
 
 def without_source_date_epoch(fxn):
@@ -228,7 +232,11 @@ class PyCompileCLITestCase(unittest.TestCase):
             file.write('x = 123\n')
 
     def tearDown(self):
+<<<<<<< HEAD
         os_helper.rmtree(self.directory)
+=======
+        support.rmtree(self.directory)
+>>>>>>> 3.9
 
     def pycompilecmd(self, *args, **kwargs):
         # assert_python_* helpers don't return proc object. We'll just use
@@ -264,6 +272,7 @@ class PyCompileCLITestCase(unittest.TestCase):
         self.assertEqual(stdout, b'')
         self.assertIn(b'SyntaxError', stderr)
 
+<<<<<<< HEAD
     def test_bad_syntax_with_quiet(self):
         bad_syntax = os.path.join(os.path.dirname(__file__), 'badsyntax_3131.py')
         rc, stdout, stderr = self.pycompilecmd_failure('-q', bad_syntax)
@@ -271,6 +280,8 @@ class PyCompileCLITestCase(unittest.TestCase):
         self.assertEqual(stdout, b'')
         self.assertEqual(stderr, b'')
 
+=======
+>>>>>>> 3.9
     def test_file_not_exists(self):
         should_not_exists = os.path.join(os.path.dirname(__file__), 'should_not_exists.py')
         rc, stdout, stderr = self.pycompilecmd_failure(self.source_path, should_not_exists)
@@ -278,6 +289,7 @@ class PyCompileCLITestCase(unittest.TestCase):
         self.assertEqual(stdout, b'')
         self.assertIn(b'No such file or directory', stderr)
 
+<<<<<<< HEAD
     def test_file_not_exists_with_quiet(self):
         should_not_exists = os.path.join(os.path.dirname(__file__), 'should_not_exists.py')
         rc, stdout, stderr = self.pycompilecmd_failure('-q', self.source_path, should_not_exists)
@@ -285,6 +297,8 @@ class PyCompileCLITestCase(unittest.TestCase):
         self.assertEqual(stdout, b'')
         self.assertEqual(stderr, b'')
 
+=======
+>>>>>>> 3.9
 
 if __name__ == "__main__":
     unittest.main()

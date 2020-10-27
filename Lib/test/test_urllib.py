@@ -152,7 +152,11 @@ class urlopen_FileTests(unittest.TestCase):
             f.write(self.text)
         finally:
             f.close()
+<<<<<<< HEAD
         self.pathname = os_helper.TESTFN
+=======
+        self.pathname = support.TESTFN
+>>>>>>> 3.9
         self.quoted_pathname = urllib.parse.quote(self.pathname)
         self.returned_obj = urlopen("file:%s" % self.quoted_pathname)
 

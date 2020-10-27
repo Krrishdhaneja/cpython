@@ -576,6 +576,14 @@ static PyGetSetDef frame_getsetlist[] = {
 /* max value for numfree */
 #define PyFrame_MAXFREELIST 200
 
+<<<<<<< HEAD
+=======
+#if PyFrame_MAXFREELIST > 0
+static PyFrameObject *free_list = NULL;
+static int numfree = 0;         /* number of frames currently in free_list */
+#endif
+
+>>>>>>> 3.9
 static void _Py_HOT_FUNCTION
 frame_dealloc(PyFrameObject *f)
 {

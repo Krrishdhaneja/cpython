@@ -70,11 +70,27 @@ stats: peg_extension/parse.c data/xxl.py
 time: time_compile
 
 time_compile: venv data/xxl.py
+<<<<<<< HEAD
 	$(VENVPYTHON) scripts/benchmark.py --target=xxl compile
 
 time_parse: venv data/xxl.py
 	$(VENVPYTHON) scripts/benchmark.py --target=xxl parse
 
+=======
+	$(VENVPYTHON) scripts/benchmark.py --parser=new --target=xxl compile
+
+time_parse: venv data/xxl.py
+	$(VENVPYTHON) scripts/benchmark.py --parser=new --target=xxl parse
+
+time_old: time_old_compile
+
+time_old_compile: venv data/xxl.py
+	$(VENVPYTHON) scripts/benchmark.py --parser=old --target=xxl compile
+
+time_old_parse: venv data/xxl.py
+	$(VENVPYTHON) scripts/benchmark.py --parser=old --target=xxl parse
+
+>>>>>>> 3.9
 time_peg_dir: venv
 	$(VENVPYTHON) scripts/test_parse_directory.py \
 		-d $(TESTDIR) \

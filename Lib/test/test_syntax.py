@@ -191,10 +191,13 @@ SyntaxError: cannot assign to function call
 Traceback (most recent call last):
 SyntaxError: cannot assign to function call
 
+<<<<<<< HEAD
 >>> for a, b, (c + 1, d()): pass
 Traceback (most recent call last):
 SyntaxError: cannot assign to operator
 
+=======
+>>>>>>> 3.9
 >>> for i < (): pass
 Traceback (most recent call last):
 SyntaxError: invalid syntax
@@ -728,6 +731,28 @@ SyntaxError: cannot assign to f-string expression
 >>> from t import x,
 Traceback (most recent call last):
 SyntaxError: trailing comma not allowed without surrounding parentheses
+<<<<<<< HEAD
+=======
+
+>>> from t import x,y,
+Traceback (most recent call last):
+SyntaxError: trailing comma not allowed without surrounding parentheses
+
+>>> (): int
+Traceback (most recent call last):
+SyntaxError: only single target (not tuple) can be annotated
+>>> []: int
+Traceback (most recent call last):
+SyntaxError: only single target (not list) can be annotated
+>>> (()): int
+Traceback (most recent call last):
+SyntaxError: only single target (not tuple) can be annotated
+>>> ([]): int
+Traceback (most recent call last):
+SyntaxError: only single target (not list) can be annotated
+
+Corner-cases that used to fail to raise the correct error:
+>>>>>>> 3.9
 
 >>> from t import x,y,
 Traceback (most recent call last):
@@ -942,6 +967,7 @@ pass
         except SyntaxError:
             self.fail("Empty line after a line continuation character is valid.")
 
+<<<<<<< HEAD
     @support.cpython_only
     def test_nested_named_except_blocks(self):
         code = ""
@@ -951,6 +977,8 @@ pass
             code += f"{'    '*i}except Exception as e:\n"
         code += f"{' '*4*12}pass"
         self._check_error(code, "too many statically nested blocks")
+=======
+>>>>>>> 3.9
 
 def test_main():
     support.run_unittest(SyntaxTestCase)

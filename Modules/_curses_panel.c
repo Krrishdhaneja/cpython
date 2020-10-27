@@ -41,10 +41,15 @@ _curses_panel_clear(PyObject *mod)
 static int
 _curses_panel_traverse(PyObject *mod, visitproc visit, void *arg)
 {
+<<<<<<< HEAD
     Py_VISIT(Py_TYPE(mod));
     _curses_panel_state *state = get_curses_panel_state(mod);
     Py_VISIT(state->PyCursesError);
     Py_VISIT(state->PyCursesPanel_Type);
+=======
+    Py_VISIT(Py_TYPE(m));
+    Py_VISIT(get_curses_panelstate(m)->PyCursesError);
+>>>>>>> 3.9
     return 0;
 }
 

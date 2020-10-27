@@ -811,6 +811,11 @@ Python/initconfig.o: $(srcdir)/Python/initconfig.c
 	$(CC) -c $(PY_CORE_CFLAGS) \
 		-DPLATLIBDIR='"$(PLATLIBDIR)"' \
 		-o $@ $(srcdir)/Python/initconfig.c
+<<<<<<< HEAD
+=======
+
+$(IO_OBJS): $(IO_H)
+>>>>>>> 3.9
 
 $(IO_OBJS): $(IO_H)
 

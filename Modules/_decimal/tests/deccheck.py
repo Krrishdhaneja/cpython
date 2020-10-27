@@ -30,6 +30,7 @@
 #
 
 
+<<<<<<< HEAD
 import random
 import time
 
@@ -38,6 +39,12 @@ random.seed(RANDSEED)
 
 import sys
 import os
+=======
+import sys
+import os
+import time
+import random
+>>>>>>> 3.9
 from copy import copy
 from collections import defaultdict
 
@@ -47,6 +54,10 @@ from subprocess import PIPE, STDOUT
 from queue import Queue, Empty
 from threading import Thread, Event, Lock
 
+<<<<<<< HEAD
+=======
+from test.support import import_fresh_module
+>>>>>>> 3.9
 from randdec import randfloat, all_unary, all_binary, all_ternary
 from randdec import unary_optarg, binary_optarg, ternary_optarg
 from formathelper import rand_format, rand_locale
@@ -1237,6 +1248,11 @@ if __name__ == '__main__':
     assert args.single is False or args.multicore is False
     if args.single:
         args.single = args.single[0]
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3.9
+
 
 
     # Set up the testspecs list. A testspec is simply a dictionary
@@ -1306,9 +1322,15 @@ if __name__ == '__main__':
     if args.multicore:
         q = Queue()
     elif args.single:
+<<<<<<< HEAD
         log("Random seed: %d", RANDSEED)
     else:
         log("\n\nRandom seed: %d\n\n", RANDSEED)
+=======
+        log("Random seed: %d", randseed)
+    else:
+        log("\n\nRandom seed: %d\n\n", randseed)
+>>>>>>> 3.9
 
 
     FOUND_METHOD = False
@@ -1355,6 +1377,7 @@ if __name__ == '__main__':
     if args.multicore:
         error = Event()
         write_lock = Lock()
+<<<<<<< HEAD
 
         def write_output(out, returncode):
             if returncode != 0:
@@ -1364,12 +1387,24 @@ if __name__ == '__main__':
                 sys.stdout.buffer.write(out + b"\n")
                 sys.stdout.buffer.flush()
 
+=======
+
+        def write_output(out, returncode):
+            if returncode != 0:
+                error.set()
+
+            with write_lock:
+                sys.stdout.buffer.write(out + b"\n")
+                sys.stdout.buffer.flush()
+
+>>>>>>> 3.9
         def tfunc():
             while not error.is_set():
                 try:
                     test = q.get(block=False, timeout=-1)
                 except Empty:
                     return
+<<<<<<< HEAD
 
                 cmd = [sys.executable, "deccheck.py", "--%s" % args.time, "--single", test]
                 p = subprocess.Popen(cmd, stdout=PIPE, stderr=STDOUT)
@@ -1383,6 +1418,21 @@ if __name__ == '__main__':
             t[i] = Thread(target=tfunc)
             t[i].start()
 
+=======
+
+                cmd = [sys.executable, "deccheck.py", "--%s" % args.time, "--single", test]
+                p = subprocess.Popen(cmd, stdout=PIPE, stderr=STDOUT)
+                out, _ = p.communicate()
+                write_output(out, p.returncode)
+
+        N = os.cpu_count()
+        t = N * [None]
+
+        for i in range(N):
+            t[i] = Thread(target=tfunc)
+            t[i].start()
+
+>>>>>>> 3.9
         for i in range(N):
             t[i].join()
 

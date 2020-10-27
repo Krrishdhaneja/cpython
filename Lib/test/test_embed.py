@@ -367,7 +367,11 @@ class InitConfigTests(EmbeddingTestsMixin, unittest.TestCase):
         'program_name': GET_DEFAULT_CONFIG,
         'parse_argv': 0,
         'argv': [""],
+<<<<<<< HEAD
         'orig_argv': [],
+=======
+        '_orig_argv': [],
+>>>>>>> 3.9
 
         'xoptions': [],
         'warnoptions': [],
@@ -737,7 +741,10 @@ class InitConfigTests(EmbeddingTestsMixin, unittest.TestCase):
         self.check_pre_config(configs, expected_preconfig)
         self.check_config(configs, expected_config)
         self.check_global_config(configs)
+<<<<<<< HEAD
         self.check_path_config(configs, expected_pathconfig)
+=======
+>>>>>>> 3.9
         return configs
 
     def test_init_default_config(self):
@@ -792,11 +799,19 @@ class InitConfigTests(EmbeddingTestsMixin, unittest.TestCase):
             'pycache_prefix': 'conf_pycache_prefix',
             'program_name': './conf_program_name',
             'argv': ['-c', 'arg2'],
+<<<<<<< HEAD
             'orig_argv': ['python3',
                           '-W', 'cmdline_warnoption',
                           '-X', 'cmdline_xoption',
                           '-c', 'pass',
                           'arg2'],
+=======
+            '_orig_argv': ['python3',
+                           '-W', 'cmdline_warnoption',
+                           '-X', 'cmdline_xoption',
+                           '-c', 'pass',
+                           'arg2'],
+>>>>>>> 3.9
             'parse_argv': 1,
             'xoptions': [
                 'config_xoption1=3',
@@ -858,6 +873,10 @@ class InitConfigTests(EmbeddingTestsMixin, unittest.TestCase):
             'warnoptions': ['EnvVar'],
             'platlibdir': 'env_platlibdir',
             'module_search_paths': self.IGNORE_CONFIG,
+<<<<<<< HEAD
+=======
+            '_use_peg_parser': 0,
+>>>>>>> 3.9
         }
         self.check_all_configs("test_init_compat_env", config, preconfig,
                                api=API_COMPAT)
@@ -887,6 +906,10 @@ class InitConfigTests(EmbeddingTestsMixin, unittest.TestCase):
             'warnoptions': ['EnvVar'],
             'platlibdir': 'env_platlibdir',
             'module_search_paths': self.IGNORE_CONFIG,
+<<<<<<< HEAD
+=======
+            '_use_peg_parser': 0,
+>>>>>>> 3.9
         }
         self.check_all_configs("test_init_python_env", config, preconfig,
                                api=API_PYTHON)
@@ -927,7 +950,11 @@ class InitConfigTests(EmbeddingTestsMixin, unittest.TestCase):
         }
         config = {
             'argv': ['script.py'],
+<<<<<<< HEAD
             'orig_argv': ['python3', '-X', 'dev', 'script.py'],
+=======
+            '_orig_argv': ['python3', '-X', 'dev', 'script.py'],
+>>>>>>> 3.9
             'run_filename': os.path.abspath('script.py'),
             'dev_mode': 1,
             'faulthandler': 1,
@@ -949,7 +976,11 @@ class InitConfigTests(EmbeddingTestsMixin, unittest.TestCase):
                "script.py"]
         config = {
             'argv': argv,
+<<<<<<< HEAD
             'orig_argv': argv,
+=======
+            '_orig_argv': argv,
+>>>>>>> 3.9
             'isolated': 0,
         }
         self.check_all_configs("test_preinit_dont_parse_argv", config, preconfig,
@@ -1028,9 +1059,15 @@ class InitConfigTests(EmbeddingTestsMixin, unittest.TestCase):
                 'ignore:::sysadd_warnoption',
                 'ignore:::config_warnoption',
             ],
+<<<<<<< HEAD
             'orig_argv': ['python3',
                           '-W', 'ignore:::cmdline_warnoption',
                           '-X', 'cmdline_xoption'],
+=======
+            '_orig_argv': ['python3',
+                           '-W', 'ignore:::cmdline_warnoption',
+                           '-X', 'cmdline_xoption'],
+>>>>>>> 3.9
         }
         self.check_all_configs("test_init_sys_add", config, api=API_PYTHON)
 
@@ -1039,7 +1076,11 @@ class InitConfigTests(EmbeddingTestsMixin, unittest.TestCase):
                 'print(json.dumps(_testinternalcapi.get_configs()))')
         config = {
             'argv': ['-c', 'arg2'],
+<<<<<<< HEAD
             'orig_argv': ['python3', '-c', code, 'arg2'],
+=======
+            '_orig_argv': ['python3', '-c', code, 'arg2'],
+>>>>>>> 3.9
             'program_name': './python3',
             'run_command': code + '\n',
             'parse_argv': 1,
@@ -1051,9 +1092,15 @@ class InitConfigTests(EmbeddingTestsMixin, unittest.TestCase):
                 'print(json.dumps(_testinternalcapi.get_configs()))')
         config = {
             'argv': ['-c', 'arg2'],
+<<<<<<< HEAD
             'orig_argv': ['python3',
                           '-c', code,
                           'arg2'],
+=======
+            '_orig_argv': ['python3',
+                           '-c', code,
+                           'arg2'],
+>>>>>>> 3.9
             'program_name': './python3',
             'run_command': code + '\n',
             'parse_argv': 1,
@@ -1067,7 +1114,11 @@ class InitConfigTests(EmbeddingTestsMixin, unittest.TestCase):
         config = {
             'parse_argv': 1,
             'argv': ['-c', 'arg1', '-v', 'arg3'],
+<<<<<<< HEAD
             'orig_argv': ['./argv0', '-E', '-c', 'pass', 'arg1', '-v', 'arg3'],
+=======
+            '_orig_argv': ['./argv0', '-E', '-c', 'pass', 'arg1', '-v', 'arg3'],
+>>>>>>> 3.9
             'program_name': './argv0',
             'run_command': 'pass\n',
             'use_environment': 0,
@@ -1081,7 +1132,11 @@ class InitConfigTests(EmbeddingTestsMixin, unittest.TestCase):
         config = {
             'parse_argv': 0,
             'argv': ['./argv0', '-E', '-c', 'pass', 'arg1', '-v', 'arg3'],
+<<<<<<< HEAD
             'orig_argv': ['./argv0', '-E', '-c', 'pass', 'arg1', '-v', 'arg3'],
+=======
+            '_orig_argv': ['./argv0', '-E', '-c', 'pass', 'arg1', '-v', 'arg3'],
+>>>>>>> 3.9
             'program_name': './argv0',
         }
         self.check_all_configs("test_init_dont_parse_argv", config, pre_config,
@@ -1324,10 +1379,25 @@ class InitConfigTests(EmbeddingTestsMixin, unittest.TestCase):
                 path_config['python3_dll'] = dll
 
             env = self.copy_paths_by_env(config)
+<<<<<<< HEAD
             self.check_all_configs("test_init_compat_config", config,
                                    expected_pathconfig=path_config,
                                    api=API_COMPAT, env=env,
                                    ignore_stderr=True, cwd=tmpdir)
+=======
+            actual = self.check_all_configs("test_init_compat_config", config,
+                                            api=API_COMPAT, env=env,
+                                            ignore_stderr=True, cwd=tmpdir)
+            if MS_WINDOWS:
+                self.assertEqual(
+                    actual['windows']['python3_dll'],
+                    os.path.join(
+                        tmpdir,
+                        os.path.basename(self.EXPECTED_CONFIG['windows']['python3_dll'])
+                    )
+                )
+
+>>>>>>> 3.9
 
     def test_global_pathconfig(self):
         # Test C API functions getting the path configuration:
@@ -1387,9 +1457,15 @@ class InitConfigTests(EmbeddingTestsMixin, unittest.TestCase):
             'faulthandler': 1,
             'bytes_warning': 1,
             'warnoptions': warnoptions,
+<<<<<<< HEAD
             'orig_argv': ['python3',
                           '-Wignore:::cmdline1',
                           '-Wignore:::cmdline2'],
+=======
+            '_orig_argv': ['python3',
+                           '-Wignore:::cmdline1',
+                           '-Wignore:::cmdline2'],
+>>>>>>> 3.9
         }
         self.check_all_configs("test_init_warnoptions", config, preconfig,
                                api=API_PYTHON)

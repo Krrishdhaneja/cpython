@@ -1259,10 +1259,21 @@ flush_std_files(void)
 static void
 finalize_interp_types(PyThreadState *tstate)
 {
+<<<<<<< HEAD
     // The _ast module state is shared by all interpreters.
     // The state must only be cleared by the main interpreter.
     if (_Py_IsMainInterpreter(tstate)) {
         _PyAST_Fini(tstate);
+=======
+    if (is_main_interp) {
+        /* Sundry finalizers */
+        _PyAST_Fini();
+        _PyFrame_Fini();
+        _PyTuple_Fini();
+        _PyList_Fini();
+        _PySet_Fini();
+        _PyBytes_Fini();
+>>>>>>> 3.9
     }
 
     _PyExc_Fini(tstate);
@@ -1292,8 +1303,24 @@ finalize_interp_clear(PyThreadState *tstate)
     /* Clear interpreter state and all thread states */
     PyInterpreterState_Clear(tstate->interp);
 
+<<<<<<< HEAD
     /* Last explicit GC collection */
     _PyGC_CollectNoFail();
+=======
+    /* Trigger a GC collection on subinterpreters*/
+    if (!is_main_interp) {
+        _PyGC_CollectNoFail();
+    }
+
+    /* Clear all loghooks */
+    /* Both _PySys_Audit function and users still need PyObject, such as tuple.
+       Call _PySys_ClearAuditHooks when PyObject available. */
+    if (is_main_interp) {
+        _PySys_ClearAuditHooks(tstate);
+    }
+
+    finalize_interp_types(tstate, is_main_interp);
+>>>>>>> 3.9
 
     /* Clear all loghooks */
     /* Both _PySys_Audit function and users still need PyObject, such as tuple.
@@ -1559,12 +1586,10 @@ new_interpreter(PyThreadState **tstate_p, int isolated_subinterpreter)
 
     /* Copy the current interpreter config into the new interpreter */
     const PyConfig *config;
-#ifndef EXPERIMENTAL_ISOLATED_SUBINTERPRETERS
     if (save_tstate != NULL) {
         config = _PyInterpreterState_GetConfig(save_tstate->interp);
     }
     else
-#endif
     {
         /* No current thread state, copy from the main interpreter */
         PyInterpreterState *main_interp = PyInterpreterState_Main();

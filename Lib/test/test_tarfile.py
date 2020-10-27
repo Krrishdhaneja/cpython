@@ -2452,7 +2452,11 @@ class CommandLineTest(unittest.TestCase):
         self.make_simple_tarfile(tmpname)
         for opt in '-v', '--verbose':
             try:
+<<<<<<< HEAD
                 with os_helper.temp_cwd(tarextdir):
+=======
+                with support.temp_cwd(tarextdir):
+>>>>>>> 3.9
                     out = self.tarfilecmd(opt, '-e', tmpname,
                                           PYTHONIOENCODING='utf-8')
                 self.assertIn(b' file is extracted.', out)

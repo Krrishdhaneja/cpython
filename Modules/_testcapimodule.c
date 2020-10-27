@@ -1669,7 +1669,10 @@ exit:
 
 static volatile int x;
 
+<<<<<<< HEAD
 #if USE_UNICODE_WCHAR_CACHE
+=======
+>>>>>>> 3.9
 /* Ignore use of deprecated APIs */
 _Py_COMP_DIAG_PUSH
 _Py_COMP_DIAG_IGNORE_DEPR_DECLS
@@ -1858,6 +1861,7 @@ _Py_COMP_DIAG_POP
 
     Py_RETURN_NONE;
 }
+_Py_COMP_DIAG_POP
 
 static PyObject *
 unicode_aswidechar(PyObject *self, PyObject *args)
@@ -2033,7 +2037,10 @@ unicode_copycharacters(PyObject *self, PyObject *args)
     return Py_BuildValue("(Nn)", to_copy, copied);
 }
 
+<<<<<<< HEAD
 #if USE_UNICODE_WCHAR_CACHE
+=======
+>>>>>>> 3.9
 /* Ignore use of deprecated APIs */
 _Py_COMP_DIAG_PUSH
 _Py_COMP_DIAG_IGNORE_DEPR_DECLS
@@ -2106,7 +2113,10 @@ unicode_legacy_string(PyObject *self, PyObject *args)
     return u;
 }
 _Py_COMP_DIAG_POP
+<<<<<<< HEAD
 #endif /* USE_UNICODE_WCHAR_CACHE */
+=======
+>>>>>>> 3.9
 
 static PyObject *
 getargs_w_star(PyObject *self, PyObject *args)

@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 What's New in IDLE 3.10.0 (since 3.9.0)
 Released on 2021-10-04?
+=======
+What's New in IDLE 3.9.1
+Released on 2020-12-07?
+>>>>>>> 3.9
 ======================================
 
 

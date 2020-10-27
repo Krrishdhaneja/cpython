@@ -791,5 +791,9 @@ class CParserGenerator(ParserGenerator, GrammarVisitor):
         name = node.name if node.name else call.assigned_variable
         if name is not None:
             name = self.dedupe(name)
+<<<<<<< HEAD
         return_type = call.return_type if node.type is None else node.type
         return name, return_type
+=======
+        return name, call.return_type
+>>>>>>> 3.9

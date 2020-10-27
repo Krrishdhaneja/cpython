@@ -334,6 +334,7 @@ do {                                           \
     }                                          \
 } while (0)
 
+<<<<<<< HEAD
 #define ADD_EXCEPTION(module, name, exc, base)                  \
 do {                                                            \
     exc = PyErr_NewException(MODULE_NAME "." name, base, NULL); \
@@ -346,6 +347,8 @@ do {                                                            \
     }                                                           \
 } while (0)
 
+=======
+>>>>>>> 3.9
 PyMODINIT_FUNC PyInit__sqlite3(void)
 {
     PyObject *module;
@@ -369,10 +372,21 @@ PyMODINIT_FUNC PyInit__sqlite3(void)
         return NULL;
     }
 
+<<<<<<< HEAD
     ADD_TYPE(module, *pysqlite_ConnectionType);
     ADD_TYPE(module, *pysqlite_CursorType);
     ADD_TYPE(module, *pysqlite_PrepareProtocolType);
     ADD_TYPE(module, *pysqlite_RowType);
+=======
+    ADD_TYPE(module, pysqlite_ConnectionType);
+    ADD_TYPE(module, pysqlite_CursorType);
+    ADD_TYPE(module, pysqlite_PrepareProtocolType);
+    ADD_TYPE(module, pysqlite_RowType);
+
+    if (!(dict = PyModule_GetDict(module))) {
+        goto error;
+    }
+>>>>>>> 3.9
 
     /*** Create DB-API Exception hierarchy */
     ADD_EXCEPTION(module, "Error", pysqlite_Error, PyExc_Exception);

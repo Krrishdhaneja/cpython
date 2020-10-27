@@ -174,11 +174,18 @@ class UUStdIOTest(unittest.TestCase):
 class UUFileTest(unittest.TestCase):
 
     def setUp(self):
+<<<<<<< HEAD
         # uu.encode() supports only ASCII file names
         self.tmpin  = os_helper.TESTFN_ASCII + "i"
         self.tmpout = os_helper.TESTFN_ASCII + "o"
         self.addCleanup(os_helper.unlink, self.tmpin)
         self.addCleanup(os_helper.unlink, self.tmpout)
+=======
+        self.tmpin  = support.TESTFN_ASCII + "i"
+        self.tmpout = support.TESTFN_ASCII + "o"
+        self.addCleanup(support.unlink, self.tmpin)
+        self.addCleanup(support.unlink, self.tmpout)
+>>>>>>> 3.9
 
     def test_encode(self):
         with open(self.tmpin, 'wb') as fin:

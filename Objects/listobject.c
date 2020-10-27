@@ -105,6 +105,17 @@ list_preallocate_exact(PyListObject *self, Py_ssize_t size)
     return 0;
 }
 
+<<<<<<< HEAD
+=======
+/* Empty list reuse scheme to save calls to malloc and free */
+#ifndef PyList_MAXFREELIST
+#  define PyList_MAXFREELIST 80
+#endif
+
+static PyListObject *free_list[PyList_MAXFREELIST];
+static int numfree = 0;
+
+>>>>>>> 3.9
 void
 _PyList_ClearFreeList(PyThreadState *tstate)
 {

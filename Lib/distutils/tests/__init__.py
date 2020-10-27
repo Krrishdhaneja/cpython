@@ -15,8 +15,12 @@ by import rather than matching pre-defined names.
 import os
 import sys
 import unittest
+<<<<<<< HEAD
 from test.support import run_unittest
 from test.support.warnings_helper import save_restore_warnings_filters
+=======
+from test.support import run_unittest, save_restore_warnings_filters
+>>>>>>> 3.9
 
 
 here = os.path.dirname(__file__) or os.curdir

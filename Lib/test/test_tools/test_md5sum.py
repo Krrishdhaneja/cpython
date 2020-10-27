@@ -2,7 +2,11 @@
 
 import os
 import unittest
+<<<<<<< HEAD
 from test.support import os_helper
+=======
+from test import support
+>>>>>>> 3.9
 from test.support import hashlib_helper
 from test.support.script_helper import assert_python_ok, assert_python_failure
 

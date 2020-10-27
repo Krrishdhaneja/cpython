@@ -48,8 +48,13 @@ extern "C" {
   #include <stdio.h>
   #include <stdlib.h>
 #endif
+<<<<<<< HEAD
 
 
+=======
+
+
+>>>>>>> 3.9
 #if (defined(__linux__) || defined(__FreeBSD__) || defined(__APPLE__)) && \
     defined(__GNUC__) && __GNUC__ >= 4 && !defined(__INTEL_COMPILER)
   #define MPD_PRAGMA(x) _Pragma(x)

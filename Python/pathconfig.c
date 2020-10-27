@@ -189,6 +189,7 @@ done:
 PyObject *
 _PyPathConfig_AsDict(void)
 {
+<<<<<<< HEAD
     PyObject *dict = PyDict_New();
     if (dict == NULL) {
         return NULL;
@@ -264,6 +265,8 @@ fail:
 PyStatus
 _PyConfig_WritePathConfig(const PyConfig *config)
 {
+=======
+>>>>>>> 3.9
     return pathconfig_set_from_config(&_Py_path_config, config);
 }
 

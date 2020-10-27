@@ -601,7 +601,11 @@ PyConfig_Clear(PyConfig *config)
     CLEAR(config->run_filename);
     CLEAR(config->check_hash_pycs_mode);
 
+<<<<<<< HEAD
     _PyWideStringList_Clear(&config->orig_argv);
+=======
+    _PyWideStringList_Clear(&config->_orig_argv);
+>>>>>>> 3.9
 #undef CLEAR
 }
 
@@ -856,7 +860,11 @@ _PyConfig_Copy(PyConfig *config, const PyConfig *config2)
     COPY_ATTR(pathconfig_warnings);
     COPY_ATTR(_init_main);
     COPY_ATTR(_isolated_interpreter);
+<<<<<<< HEAD
     COPY_WSTRLIST(orig_argv);
+=======
+    COPY_WSTRLIST(_orig_argv);
+>>>>>>> 3.9
 
 #undef COPY_ATTR
 #undef COPY_WSTR_ATTR
@@ -955,7 +963,11 @@ config_as_dict(const PyConfig *config)
     SET_ITEM_INT(pathconfig_warnings);
     SET_ITEM_INT(_init_main);
     SET_ITEM_INT(_isolated_interpreter);
+<<<<<<< HEAD
     SET_ITEM_WSTRLIST(orig_argv);
+=======
+    SET_ITEM_WSTRLIST(_orig_argv);
+>>>>>>> 3.9
 
     return dict;
 
@@ -1862,8 +1874,13 @@ _PyConfig_Write(const PyConfig *config, _PyRuntimeState *runtime)
     preconfig->use_environment = config->use_environment;
     preconfig->dev_mode = config->dev_mode;
 
+<<<<<<< HEAD
     if (_Py_SetArgcArgv(config->orig_argv.length,
                         config->orig_argv.items) < 0)
+=======
+    if (_Py_SetArgcArgv(config->_orig_argv.length,
+                        config->_orig_argv.items) < 0)
+>>>>>>> 3.9
     {
         return _PyStatus_NO_MEMORY();
     }
@@ -2499,11 +2516,19 @@ PyConfig_Read(PyConfig *config)
 
     config_get_global_vars(config);
 
+<<<<<<< HEAD
     if (config->orig_argv.length == 0
         && !(config->argv.length == 1
              && wcscmp(config->argv.items[0], L"") == 0))
     {
         if (_PyWideStringList_Copy(&config->orig_argv, &config->argv) < 0) {
+=======
+    if (config->_orig_argv.length == 0
+        && !(config->argv.length == 1
+             && wcscmp(config->argv.items[0], L"") == 0))
+    {
+        if (_PyWideStringList_Copy(&config->_orig_argv, &config->argv) < 0) {
+>>>>>>> 3.9
             return _PyStatus_NO_MEMORY();
         }
     }
@@ -2587,7 +2612,11 @@ PyConfig_Read(PyConfig *config)
     assert(config->check_hash_pycs_mode != NULL);
     assert(config->_install_importlib >= 0);
     assert(config->pathconfig_warnings >= 0);
+<<<<<<< HEAD
     assert(_PyWideStringList_CheckConsistency(&config->orig_argv));
+=======
+    assert(_PyWideStringList_CheckConsistency(&config->_orig_argv));
+>>>>>>> 3.9
 
     status = _PyStatus_OK();
 

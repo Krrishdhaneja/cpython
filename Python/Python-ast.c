@@ -250,7 +250,11 @@ get_ast_state(PyObject* Py_UNUSED(module))
     return state;
 }
 
+<<<<<<< HEAD
 void _PyAST_Fini(PyThreadState *tstate)
+=======
+void _PyAST_Fini()
+>>>>>>> 3.9
 {
     astmodulestate* state = &global_ast_state;
     Py_CLEAR(state->AST_type);
@@ -549,6 +553,7 @@ static int init_identifiers(astmodulestate *state)
     return 1;
 };
 
+<<<<<<< HEAD
 GENERATE_ASDL_SEQ_CONSTRUCTOR(mod, mod_ty)
 GENERATE_ASDL_SEQ_CONSTRUCTOR(stmt, stmt_ty)
 GENERATE_ASDL_SEQ_CONSTRUCTOR(expr, expr_ty)
@@ -561,6 +566,8 @@ GENERATE_ASDL_SEQ_CONSTRUCTOR(alias, alias_ty)
 GENERATE_ASDL_SEQ_CONSTRUCTOR(withitem, withitem_ty)
 GENERATE_ASDL_SEQ_CONSTRUCTOR(type_ignore, type_ignore_ty)
 
+=======
+>>>>>>> 3.9
 static PyObject* ast2obj_mod(astmodulestate *state, void*);
 static const char * const Module_fields[]={
     "body",
@@ -1109,7 +1116,11 @@ static PyObject* ast2obj_list(astmodulestate *state, asdl_seq *seq, PyObject* (*
     if (!result)
         return NULL;
     for (i = 0; i < n; i++) {
+<<<<<<< HEAD
         value = func(state, asdl_seq_GET_UNTYPED(seq, i));
+=======
+        value = func(state, asdl_seq_GET(seq, i));
+>>>>>>> 3.9
         if (!value) {
             Py_DECREF(result);
             return NULL;
@@ -3404,12 +3415,20 @@ ast2obj_mod(astmodulestate *state, void* _o)
         tp = (PyTypeObject *)state->Module_type;
         result = PyType_GenericNew(tp, NULL, NULL);
         if (!result) goto failed;
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.Module.body, ast2obj_stmt);
+=======
+        value = ast2obj_list(state, o->v.Module.body, ast2obj_stmt);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->body, value) == -1)
             goto failed;
         Py_DECREF(value);
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.Module.type_ignores,
+=======
+        value = ast2obj_list(state, o->v.Module.type_ignores,
+>>>>>>> 3.9
                              ast2obj_type_ignore);
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->type_ignores, value) == -1)
@@ -3420,8 +3439,12 @@ ast2obj_mod(astmodulestate *state, void* _o)
         tp = (PyTypeObject *)state->Interactive_type;
         result = PyType_GenericNew(tp, NULL, NULL);
         if (!result) goto failed;
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.Interactive.body,
                              ast2obj_stmt);
+=======
+        value = ast2obj_list(state, o->v.Interactive.body, ast2obj_stmt);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->body, value) == -1)
             goto failed;
@@ -3441,8 +3464,12 @@ ast2obj_mod(astmodulestate *state, void* _o)
         tp = (PyTypeObject *)state->FunctionType_type;
         result = PyType_GenericNew(tp, NULL, NULL);
         if (!result) goto failed;
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.FunctionType.argtypes,
                              ast2obj_expr);
+=======
+        value = ast2obj_list(state, o->v.FunctionType.argtypes, ast2obj_expr);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->argtypes, value) == -1)
             goto failed;
@@ -3485,13 +3512,21 @@ ast2obj_stmt(astmodulestate *state, void* _o)
         if (PyObject_SetAttr(result, state->args, value) == -1)
             goto failed;
         Py_DECREF(value);
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.FunctionDef.body,
                              ast2obj_stmt);
+=======
+        value = ast2obj_list(state, o->v.FunctionDef.body, ast2obj_stmt);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->body, value) == -1)
             goto failed;
         Py_DECREF(value);
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.FunctionDef.decorator_list,
+=======
+        value = ast2obj_list(state, o->v.FunctionDef.decorator_list,
+>>>>>>> 3.9
                              ast2obj_expr);
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->decorator_list, value) == -1)
@@ -3522,14 +3557,22 @@ ast2obj_stmt(astmodulestate *state, void* _o)
         if (PyObject_SetAttr(result, state->args, value) == -1)
             goto failed;
         Py_DECREF(value);
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.AsyncFunctionDef.body,
                              ast2obj_stmt);
+=======
+        value = ast2obj_list(state, o->v.AsyncFunctionDef.body, ast2obj_stmt);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->body, value) == -1)
             goto failed;
         Py_DECREF(value);
+<<<<<<< HEAD
         value = ast2obj_list(state,
                              (asdl_seq*)o->v.AsyncFunctionDef.decorator_list,
+=======
+        value = ast2obj_list(state, o->v.AsyncFunctionDef.decorator_list,
+>>>>>>> 3.9
                              ast2obj_expr);
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->decorator_list, value) == -1)
@@ -3555,26 +3598,42 @@ ast2obj_stmt(astmodulestate *state, void* _o)
         if (PyObject_SetAttr(result, state->name, value) == -1)
             goto failed;
         Py_DECREF(value);
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.ClassDef.bases,
                              ast2obj_expr);
+=======
+        value = ast2obj_list(state, o->v.ClassDef.bases, ast2obj_expr);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->bases, value) == -1)
             goto failed;
         Py_DECREF(value);
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.ClassDef.keywords,
                              ast2obj_keyword);
+=======
+        value = ast2obj_list(state, o->v.ClassDef.keywords, ast2obj_keyword);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->keywords, value) == -1)
             goto failed;
         Py_DECREF(value);
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.ClassDef.body,
                              ast2obj_stmt);
+=======
+        value = ast2obj_list(state, o->v.ClassDef.body, ast2obj_stmt);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->body, value) == -1)
             goto failed;
         Py_DECREF(value);
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.ClassDef.decorator_list,
                              ast2obj_expr);
+=======
+        value = ast2obj_list(state, o->v.ClassDef.decorator_list, ast2obj_expr);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->decorator_list, value) == -1)
             goto failed;
@@ -3594,8 +3653,12 @@ ast2obj_stmt(astmodulestate *state, void* _o)
         tp = (PyTypeObject *)state->Delete_type;
         result = PyType_GenericNew(tp, NULL, NULL);
         if (!result) goto failed;
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.Delete.targets,
                              ast2obj_expr);
+=======
+        value = ast2obj_list(state, o->v.Delete.targets, ast2obj_expr);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->targets, value) == -1)
             goto failed;
@@ -3605,8 +3668,12 @@ ast2obj_stmt(astmodulestate *state, void* _o)
         tp = (PyTypeObject *)state->Assign_type;
         result = PyType_GenericNew(tp, NULL, NULL);
         if (!result) goto failed;
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.Assign.targets,
                              ast2obj_expr);
+=======
+        value = ast2obj_list(state, o->v.Assign.targets, ast2obj_expr);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->targets, value) == -1)
             goto failed;
@@ -3681,12 +3748,20 @@ ast2obj_stmt(astmodulestate *state, void* _o)
         if (PyObject_SetAttr(result, state->iter, value) == -1)
             goto failed;
         Py_DECREF(value);
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.For.body, ast2obj_stmt);
+=======
+        value = ast2obj_list(state, o->v.For.body, ast2obj_stmt);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->body, value) == -1)
             goto failed;
         Py_DECREF(value);
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.For.orelse, ast2obj_stmt);
+=======
+        value = ast2obj_list(state, o->v.For.orelse, ast2obj_stmt);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->orelse, value) == -1)
             goto failed;
@@ -3711,14 +3786,22 @@ ast2obj_stmt(astmodulestate *state, void* _o)
         if (PyObject_SetAttr(result, state->iter, value) == -1)
             goto failed;
         Py_DECREF(value);
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.AsyncFor.body,
                              ast2obj_stmt);
+=======
+        value = ast2obj_list(state, o->v.AsyncFor.body, ast2obj_stmt);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->body, value) == -1)
             goto failed;
         Py_DECREF(value);
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.AsyncFor.orelse,
                              ast2obj_stmt);
+=======
+        value = ast2obj_list(state, o->v.AsyncFor.orelse, ast2obj_stmt);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->orelse, value) == -1)
             goto failed;
@@ -3738,12 +3821,20 @@ ast2obj_stmt(astmodulestate *state, void* _o)
         if (PyObject_SetAttr(result, state->test, value) == -1)
             goto failed;
         Py_DECREF(value);
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.While.body, ast2obj_stmt);
+=======
+        value = ast2obj_list(state, o->v.While.body, ast2obj_stmt);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->body, value) == -1)
             goto failed;
         Py_DECREF(value);
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.While.orelse, ast2obj_stmt);
+=======
+        value = ast2obj_list(state, o->v.While.orelse, ast2obj_stmt);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->orelse, value) == -1)
             goto failed;
@@ -3758,12 +3849,20 @@ ast2obj_stmt(astmodulestate *state, void* _o)
         if (PyObject_SetAttr(result, state->test, value) == -1)
             goto failed;
         Py_DECREF(value);
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.If.body, ast2obj_stmt);
+=======
+        value = ast2obj_list(state, o->v.If.body, ast2obj_stmt);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->body, value) == -1)
             goto failed;
         Py_DECREF(value);
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.If.orelse, ast2obj_stmt);
+=======
+        value = ast2obj_list(state, o->v.If.orelse, ast2obj_stmt);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->orelse, value) == -1)
             goto failed;
@@ -3773,13 +3872,21 @@ ast2obj_stmt(astmodulestate *state, void* _o)
         tp = (PyTypeObject *)state->With_type;
         result = PyType_GenericNew(tp, NULL, NULL);
         if (!result) goto failed;
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.With.items,
                              ast2obj_withitem);
+=======
+        value = ast2obj_list(state, o->v.With.items, ast2obj_withitem);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->items, value) == -1)
             goto failed;
         Py_DECREF(value);
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.With.body, ast2obj_stmt);
+=======
+        value = ast2obj_list(state, o->v.With.body, ast2obj_stmt);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->body, value) == -1)
             goto failed;
@@ -3794,14 +3901,22 @@ ast2obj_stmt(astmodulestate *state, void* _o)
         tp = (PyTypeObject *)state->AsyncWith_type;
         result = PyType_GenericNew(tp, NULL, NULL);
         if (!result) goto failed;
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.AsyncWith.items,
                              ast2obj_withitem);
+=======
+        value = ast2obj_list(state, o->v.AsyncWith.items, ast2obj_withitem);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->items, value) == -1)
             goto failed;
         Py_DECREF(value);
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.AsyncWith.body,
                              ast2obj_stmt);
+=======
+        value = ast2obj_list(state, o->v.AsyncWith.body, ast2obj_stmt);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->body, value) == -1)
             goto failed;
@@ -3831,24 +3946,40 @@ ast2obj_stmt(astmodulestate *state, void* _o)
         tp = (PyTypeObject *)state->Try_type;
         result = PyType_GenericNew(tp, NULL, NULL);
         if (!result) goto failed;
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.Try.body, ast2obj_stmt);
+=======
+        value = ast2obj_list(state, o->v.Try.body, ast2obj_stmt);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->body, value) == -1)
             goto failed;
         Py_DECREF(value);
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.Try.handlers,
                              ast2obj_excepthandler);
+=======
+        value = ast2obj_list(state, o->v.Try.handlers, ast2obj_excepthandler);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->handlers, value) == -1)
             goto failed;
         Py_DECREF(value);
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.Try.orelse, ast2obj_stmt);
+=======
+        value = ast2obj_list(state, o->v.Try.orelse, ast2obj_stmt);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->orelse, value) == -1)
             goto failed;
         Py_DECREF(value);
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.Try.finalbody,
                              ast2obj_stmt);
+=======
+        value = ast2obj_list(state, o->v.Try.finalbody, ast2obj_stmt);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->finalbody, value) == -1)
             goto failed;
@@ -3873,8 +4004,12 @@ ast2obj_stmt(astmodulestate *state, void* _o)
         tp = (PyTypeObject *)state->Import_type;
         result = PyType_GenericNew(tp, NULL, NULL);
         if (!result) goto failed;
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.Import.names,
                              ast2obj_alias);
+=======
+        value = ast2obj_list(state, o->v.Import.names, ast2obj_alias);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->names, value) == -1)
             goto failed;
@@ -3889,8 +4024,12 @@ ast2obj_stmt(astmodulestate *state, void* _o)
         if (PyObject_SetAttr(result, state->module, value) == -1)
             goto failed;
         Py_DECREF(value);
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.ImportFrom.names,
                              ast2obj_alias);
+=======
+        value = ast2obj_list(state, o->v.ImportFrom.names, ast2obj_alias);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->names, value) == -1)
             goto failed;
@@ -3905,8 +4044,12 @@ ast2obj_stmt(astmodulestate *state, void* _o)
         tp = (PyTypeObject *)state->Global_type;
         result = PyType_GenericNew(tp, NULL, NULL);
         if (!result) goto failed;
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.Global.names,
                              ast2obj_identifier);
+=======
+        value = ast2obj_list(state, o->v.Global.names, ast2obj_identifier);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->names, value) == -1)
             goto failed;
@@ -3916,8 +4059,12 @@ ast2obj_stmt(astmodulestate *state, void* _o)
         tp = (PyTypeObject *)state->Nonlocal_type;
         result = PyType_GenericNew(tp, NULL, NULL);
         if (!result) goto failed;
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.Nonlocal.names,
                              ast2obj_identifier);
+=======
+        value = ast2obj_list(state, o->v.Nonlocal.names, ast2obj_identifier);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->names, value) == -1)
             goto failed;
@@ -3995,8 +4142,12 @@ ast2obj_expr(astmodulestate *state, void* _o)
         if (PyObject_SetAttr(result, state->op, value) == -1)
             goto failed;
         Py_DECREF(value);
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.BoolOp.values,
                              ast2obj_expr);
+=======
+        value = ast2obj_list(state, o->v.BoolOp.values, ast2obj_expr);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->values, value) == -1)
             goto failed;
@@ -4091,12 +4242,20 @@ ast2obj_expr(astmodulestate *state, void* _o)
         tp = (PyTypeObject *)state->Dict_type;
         result = PyType_GenericNew(tp, NULL, NULL);
         if (!result) goto failed;
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.Dict.keys, ast2obj_expr);
+=======
+        value = ast2obj_list(state, o->v.Dict.keys, ast2obj_expr);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->keys, value) == -1)
             goto failed;
         Py_DECREF(value);
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.Dict.values, ast2obj_expr);
+=======
+        value = ast2obj_list(state, o->v.Dict.values, ast2obj_expr);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->values, value) == -1)
             goto failed;
@@ -4106,7 +4265,11 @@ ast2obj_expr(astmodulestate *state, void* _o)
         tp = (PyTypeObject *)state->Set_type;
         result = PyType_GenericNew(tp, NULL, NULL);
         if (!result) goto failed;
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.Set.elts, ast2obj_expr);
+=======
+        value = ast2obj_list(state, o->v.Set.elts, ast2obj_expr);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->elts, value) == -1)
             goto failed;
@@ -4121,7 +4284,11 @@ ast2obj_expr(astmodulestate *state, void* _o)
         if (PyObject_SetAttr(result, state->elt, value) == -1)
             goto failed;
         Py_DECREF(value);
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.ListComp.generators,
+=======
+        value = ast2obj_list(state, o->v.ListComp.generators,
+>>>>>>> 3.9
                              ast2obj_comprehension);
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->generators, value) == -1)
@@ -4137,7 +4304,11 @@ ast2obj_expr(astmodulestate *state, void* _o)
         if (PyObject_SetAttr(result, state->elt, value) == -1)
             goto failed;
         Py_DECREF(value);
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.SetComp.generators,
+=======
+        value = ast2obj_list(state, o->v.SetComp.generators,
+>>>>>>> 3.9
                              ast2obj_comprehension);
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->generators, value) == -1)
@@ -4158,7 +4329,11 @@ ast2obj_expr(astmodulestate *state, void* _o)
         if (PyObject_SetAttr(result, state->value, value) == -1)
             goto failed;
         Py_DECREF(value);
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.DictComp.generators,
+=======
+        value = ast2obj_list(state, o->v.DictComp.generators,
+>>>>>>> 3.9
                              ast2obj_comprehension);
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->generators, value) == -1)
@@ -4174,7 +4349,11 @@ ast2obj_expr(astmodulestate *state, void* _o)
         if (PyObject_SetAttr(result, state->elt, value) == -1)
             goto failed;
         Py_DECREF(value);
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.GeneratorExp.generators,
+=======
+        value = ast2obj_list(state, o->v.GeneratorExp.generators,
+>>>>>>> 3.9
                              ast2obj_comprehension);
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->generators, value) == -1)
@@ -4231,8 +4410,12 @@ ast2obj_expr(astmodulestate *state, void* _o)
         if (PyObject_SetAttr(result, state->ops, value) == -1)
             goto failed;
         Py_DECREF(value);
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.Compare.comparators,
                              ast2obj_expr);
+=======
+        value = ast2obj_list(state, o->v.Compare.comparators, ast2obj_expr);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->comparators, value) == -1)
             goto failed;
@@ -4247,13 +4430,21 @@ ast2obj_expr(astmodulestate *state, void* _o)
         if (PyObject_SetAttr(result, state->func, value) == -1)
             goto failed;
         Py_DECREF(value);
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.Call.args, ast2obj_expr);
+=======
+        value = ast2obj_list(state, o->v.Call.args, ast2obj_expr);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->args, value) == -1)
             goto failed;
         Py_DECREF(value);
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.Call.keywords,
                              ast2obj_keyword);
+=======
+        value = ast2obj_list(state, o->v.Call.keywords, ast2obj_keyword);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->keywords, value) == -1)
             goto failed;
@@ -4283,8 +4474,12 @@ ast2obj_expr(astmodulestate *state, void* _o)
         tp = (PyTypeObject *)state->JoinedStr_type;
         result = PyType_GenericNew(tp, NULL, NULL);
         if (!result) goto failed;
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.JoinedStr.values,
                              ast2obj_expr);
+=======
+        value = ast2obj_list(state, o->v.JoinedStr.values, ast2obj_expr);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->values, value) == -1)
             goto failed;
@@ -4379,7 +4574,11 @@ ast2obj_expr(astmodulestate *state, void* _o)
         tp = (PyTypeObject *)state->List_type;
         result = PyType_GenericNew(tp, NULL, NULL);
         if (!result) goto failed;
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.List.elts, ast2obj_expr);
+=======
+        value = ast2obj_list(state, o->v.List.elts, ast2obj_expr);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->elts, value) == -1)
             goto failed;
@@ -4394,7 +4593,11 @@ ast2obj_expr(astmodulestate *state, void* _o)
         tp = (PyTypeObject *)state->Tuple_type;
         result = PyType_GenericNew(tp, NULL, NULL);
         if (!result) goto failed;
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.Tuple.elts, ast2obj_expr);
+=======
+        value = ast2obj_list(state, o->v.Tuple.elts, ast2obj_expr);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->elts, value) == -1)
             goto failed;
@@ -4601,7 +4804,11 @@ ast2obj_comprehension(astmodulestate *state, void* _o)
     if (PyObject_SetAttr(result, state->iter, value) == -1)
         goto failed;
     Py_DECREF(value);
+<<<<<<< HEAD
     value = ast2obj_list(state, (asdl_seq*)o->ifs, ast2obj_expr);
+=======
+    value = ast2obj_list(state, o->ifs, ast2obj_expr);
+>>>>>>> 3.9
     if (!value) goto failed;
     if (PyObject_SetAttr(result, state->ifs, value) == -1)
         goto failed;
@@ -4642,8 +4849,12 @@ ast2obj_excepthandler(astmodulestate *state, void* _o)
         if (PyObject_SetAttr(result, state->name, value) == -1)
             goto failed;
         Py_DECREF(value);
+<<<<<<< HEAD
         value = ast2obj_list(state, (asdl_seq*)o->v.ExceptHandler.body,
                              ast2obj_stmt);
+=======
+        value = ast2obj_list(state, o->v.ExceptHandler.body, ast2obj_stmt);
+>>>>>>> 3.9
         if (!value) goto failed;
         if (PyObject_SetAttr(result, state->body, value) == -1)
             goto failed;
@@ -4689,12 +4900,20 @@ ast2obj_arguments(astmodulestate *state, void* _o)
     tp = (PyTypeObject *)state->arguments_type;
     result = PyType_GenericNew(tp, NULL, NULL);
     if (!result) return NULL;
+<<<<<<< HEAD
     value = ast2obj_list(state, (asdl_seq*)o->posonlyargs, ast2obj_arg);
+=======
+    value = ast2obj_list(state, o->posonlyargs, ast2obj_arg);
+>>>>>>> 3.9
     if (!value) goto failed;
     if (PyObject_SetAttr(result, state->posonlyargs, value) == -1)
         goto failed;
     Py_DECREF(value);
+<<<<<<< HEAD
     value = ast2obj_list(state, (asdl_seq*)o->args, ast2obj_arg);
+=======
+    value = ast2obj_list(state, o->args, ast2obj_arg);
+>>>>>>> 3.9
     if (!value) goto failed;
     if (PyObject_SetAttr(result, state->args, value) == -1)
         goto failed;
@@ -4704,12 +4923,20 @@ ast2obj_arguments(astmodulestate *state, void* _o)
     if (PyObject_SetAttr(result, state->vararg, value) == -1)
         goto failed;
     Py_DECREF(value);
+<<<<<<< HEAD
     value = ast2obj_list(state, (asdl_seq*)o->kwonlyargs, ast2obj_arg);
+=======
+    value = ast2obj_list(state, o->kwonlyargs, ast2obj_arg);
+>>>>>>> 3.9
     if (!value) goto failed;
     if (PyObject_SetAttr(result, state->kwonlyargs, value) == -1)
         goto failed;
     Py_DECREF(value);
+<<<<<<< HEAD
     value = ast2obj_list(state, (asdl_seq*)o->kw_defaults, ast2obj_expr);
+=======
+    value = ast2obj_list(state, o->kw_defaults, ast2obj_expr);
+>>>>>>> 3.9
     if (!value) goto failed;
     if (PyObject_SetAttr(result, state->kw_defaults, value) == -1)
         goto failed;
@@ -4719,7 +4946,11 @@ ast2obj_arguments(astmodulestate *state, void* _o)
     if (PyObject_SetAttr(result, state->kwarg, value) == -1)
         goto failed;
     Py_DECREF(value);
+<<<<<<< HEAD
     value = ast2obj_list(state, (asdl_seq*)o->defaults, ast2obj_expr);
+=======
+    value = ast2obj_list(state, o->defaults, ast2obj_expr);
+>>>>>>> 3.9
     if (!value) goto failed;
     if (PyObject_SetAttr(result, state->defaults, value) == -1)
         goto failed;
@@ -9694,6 +9925,7 @@ astmodule_exec(PyObject *m)
     }
     if (PyModule_AddIntMacro(m, PyCF_TYPE_COMMENTS) < 0) {
         return -1;
+<<<<<<< HEAD
     }
     if (PyModule_AddObject(m, "mod", state->mod_type) < 0) {
         return -1;
@@ -9702,6 +9934,16 @@ astmodule_exec(PyObject *m)
     if (PyModule_AddObject(m, "Module", state->Module_type) < 0) {
         return -1;
     }
+=======
+    }
+    if (PyModule_AddObject(m, "mod", state->mod_type) < 0) {
+        return -1;
+    }
+    Py_INCREF(state->mod_type);
+    if (PyModule_AddObject(m, "Module", state->Module_type) < 0) {
+        return -1;
+    }
+>>>>>>> 3.9
     Py_INCREF(state->Module_type);
     if (PyModule_AddObject(m, "Interactive", state->Interactive_type) < 0) {
         return -1;
@@ -9798,6 +10040,7 @@ astmodule_exec(PyObject *m)
     Py_INCREF(state->ImportFrom_type);
     if (PyModule_AddObject(m, "Global", state->Global_type) < 0) {
         return -1;
+<<<<<<< HEAD
     }
     Py_INCREF(state->Global_type);
     if (PyModule_AddObject(m, "Nonlocal", state->Nonlocal_type) < 0) {
@@ -9863,6 +10106,73 @@ astmodule_exec(PyObject *m)
     if (PyModule_AddObject(m, "SetComp", state->SetComp_type) < 0) {
         return -1;
     }
+=======
+    }
+    Py_INCREF(state->Global_type);
+    if (PyModule_AddObject(m, "Nonlocal", state->Nonlocal_type) < 0) {
+        return -1;
+    }
+    Py_INCREF(state->Nonlocal_type);
+    if (PyModule_AddObject(m, "Expr", state->Expr_type) < 0) {
+        return -1;
+    }
+    Py_INCREF(state->Expr_type);
+    if (PyModule_AddObject(m, "Pass", state->Pass_type) < 0) {
+        return -1;
+    }
+    Py_INCREF(state->Pass_type);
+    if (PyModule_AddObject(m, "Break", state->Break_type) < 0) {
+        return -1;
+    }
+    Py_INCREF(state->Break_type);
+    if (PyModule_AddObject(m, "Continue", state->Continue_type) < 0) {
+        return -1;
+    }
+    Py_INCREF(state->Continue_type);
+    if (PyModule_AddObject(m, "expr", state->expr_type) < 0) {
+        return -1;
+    }
+    Py_INCREF(state->expr_type);
+    if (PyModule_AddObject(m, "BoolOp", state->BoolOp_type) < 0) {
+        return -1;
+    }
+    Py_INCREF(state->BoolOp_type);
+    if (PyModule_AddObject(m, "NamedExpr", state->NamedExpr_type) < 0) {
+        return -1;
+    }
+    Py_INCREF(state->NamedExpr_type);
+    if (PyModule_AddObject(m, "BinOp", state->BinOp_type) < 0) {
+        return -1;
+    }
+    Py_INCREF(state->BinOp_type);
+    if (PyModule_AddObject(m, "UnaryOp", state->UnaryOp_type) < 0) {
+        return -1;
+    }
+    Py_INCREF(state->UnaryOp_type);
+    if (PyModule_AddObject(m, "Lambda", state->Lambda_type) < 0) {
+        return -1;
+    }
+    Py_INCREF(state->Lambda_type);
+    if (PyModule_AddObject(m, "IfExp", state->IfExp_type) < 0) {
+        return -1;
+    }
+    Py_INCREF(state->IfExp_type);
+    if (PyModule_AddObject(m, "Dict", state->Dict_type) < 0) {
+        return -1;
+    }
+    Py_INCREF(state->Dict_type);
+    if (PyModule_AddObject(m, "Set", state->Set_type) < 0) {
+        return -1;
+    }
+    Py_INCREF(state->Set_type);
+    if (PyModule_AddObject(m, "ListComp", state->ListComp_type) < 0) {
+        return -1;
+    }
+    Py_INCREF(state->ListComp_type);
+    if (PyModule_AddObject(m, "SetComp", state->SetComp_type) < 0) {
+        return -1;
+    }
+>>>>>>> 3.9
     Py_INCREF(state->SetComp_type);
     if (PyModule_AddObject(m, "DictComp", state->DictComp_type) < 0) {
         return -1;

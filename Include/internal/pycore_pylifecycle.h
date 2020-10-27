@@ -84,7 +84,11 @@ extern void _PyFaulthandler_Fini(void);
 extern void _PyHash_Fini(void);
 extern void _PyTraceMalloc_Fini(void);
 extern void _PyWarnings_Fini(PyInterpreterState *interp);
+<<<<<<< HEAD
 extern void _PyAST_Fini(PyThreadState *tstate);
+=======
+extern void _PyAST_Fini(void);
+>>>>>>> 3.9
 
 extern PyStatus _PyGILState_Init(PyThreadState *tstate);
 extern void _PyGILState_Fini(PyThreadState *tstate);

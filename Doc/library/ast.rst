@@ -1858,4 +1858,8 @@ to stdout.  Otherwise, the content is read from stdin.
     `Parso <https://parso.readthedocs.io>`_ is a Python parser that supports
     error recovery and round-trip parsing for different Python versions (in
     multiple Python versions). Parso is also able to list multiple syntax errors
+<<<<<<< HEAD
     in your python file.
+=======
+    in your python file.
+>>>>>>> 3.9

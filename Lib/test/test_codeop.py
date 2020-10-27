@@ -307,7 +307,11 @@ class CodeopTests(unittest.TestCase):
 
     def test_warning(self):
         # Test that the warning is only returned once.
+<<<<<<< HEAD
         with warnings_helper.check_warnings(
+=======
+        with support.check_warnings(
+>>>>>>> 3.9
                 (".*literal", SyntaxWarning),
                 (".*invalid", DeprecationWarning),
                 ) as w:

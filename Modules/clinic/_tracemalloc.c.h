@@ -212,4 +212,8 @@ _tracemalloc_reset_peak(PyObject *module, PyObject *Py_UNUSED(ignored))
 {
     return _tracemalloc_reset_peak_impl(module);
 }
+<<<<<<< HEAD
 /*[clinic end generated code: output=bafca0a19b0b0823 input=a9049054013a1b77]*/
+=======
+/*[clinic end generated code: output=a130117b1af821da input=a9049054013a1b77]*/
+>>>>>>> 3.9

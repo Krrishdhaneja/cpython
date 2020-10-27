@@ -20,10 +20,7 @@ class object "PyObject *" "&PyBaseObject_Type"
 
 #include "clinic/typeobject.c.h"
 
-/* bpo-40521: Type method cache is shared by all subinterpreters */
-#ifndef EXPERIMENTAL_ISOLATED_SUBINTERPRETERS
-#  define MCACHE
-#endif
+#define MCACHE
 
 #ifdef MCACHE
 /* Support type attribute cache */
@@ -64,10 +61,7 @@ static size_t method_cache_misses = 0;
 static size_t method_cache_collisions = 0;
 #endif
 
-/* bpo-40521: Interned strings are shared by all subinterpreters */
-#ifndef EXPERIMENTAL_ISOLATED_SUBINTERPRETERS
-#  define INTERN_NAME_STRINGS
-#endif
+#define INTERN_NAME_STRINGS
 
 /* alphabetical order */
 _Py_IDENTIFIER(__abstractmethods__);
@@ -3073,6 +3067,7 @@ PyType_FromModuleAndSpec(PyObject *module, PyType_Spec *spec, PyObject *bases)
     }
 
     /* Set type.__module__ */
+<<<<<<< HEAD
     r = _PyDict_ContainsId(type->tp_dict, &PyId___module__);
     if (r < 0) {
         goto fail;
@@ -3095,6 +3090,30 @@ PyType_FromModuleAndSpec(PyObject *module, PyType_Spec *spec, PyObject *bases)
                     spec->name))
                 goto fail;
         }
+=======
+    if (_PyDict_GetItemIdWithError(type->tp_dict, &PyId___module__) == NULL) {
+        if (PyErr_Occurred()) {
+            goto fail;
+        }
+        s = strrchr(spec->name, '.');
+        if (s != NULL) {
+            int err;
+            modname = PyUnicode_FromStringAndSize(
+                    spec->name, (Py_ssize_t)(s - spec->name));
+            if (modname == NULL) {
+                goto fail;
+            }
+            err = _PyDict_SetItemId(type->tp_dict, &PyId___module__, modname);
+            Py_DECREF(modname);
+            if (err != 0)
+                goto fail;
+        } else {
+            if (PyErr_WarnFormat(PyExc_DeprecationWarning, 1,
+                    "builtin type %.200s has no __module__ attribute",
+                    spec->name))
+                goto fail;
+        }
+>>>>>>> 3.9
     }
 
     return (PyObject*)res;

@@ -1402,12 +1402,21 @@ _Py_fopen(const char *pathname, const char *mode)
 {
     PyObject *pathname_obj = PyUnicode_DecodeFSDefault(pathname);
     if (pathname_obj == NULL) {
+<<<<<<< HEAD
         return NULL;
     }
     if (PySys_Audit("open", "Osi", pathname_obj, mode, 0) < 0) {
         Py_DECREF(pathname_obj);
         return NULL;
     }
+=======
+        return NULL;
+    }
+    if (PySys_Audit("open", "Osi", pathname_obj, mode, 0) < 0) {
+        Py_DECREF(pathname_obj);
+        return NULL;
+    }
+>>>>>>> 3.9
     Py_DECREF(pathname_obj);
 
     FILE *f = fopen(pathname, mode);
@@ -2116,6 +2125,7 @@ done:
     return res;
 
 #undef GET_LOCALE_STRING
+<<<<<<< HEAD
 }
 
 /* Our selection logic for which function to use is as follows:
@@ -2192,4 +2202,6 @@ _Py_closerange(int first, int last)
     }
 #endif /* USE_FDWALK */
     _Py_END_SUPPRESS_IPH
+=======
+>>>>>>> 3.9
 }

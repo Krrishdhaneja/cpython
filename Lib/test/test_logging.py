@@ -1184,7 +1184,11 @@ class MemoryHandlerTest(BaseTest):
                 self.mem_logger.warning("flushed")
         finally:
             for thread in target.threads:
+<<<<<<< HEAD
                 threading_helper.join_thread(thread)
+=======
+                support.join_thread(thread)
+>>>>>>> 3.9
 
 
 class ExceptionFormatter(logging.Formatter):

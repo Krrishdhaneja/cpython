@@ -25,8 +25,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+<<<<<<< HEAD
     - name: Register Sphinx problem matcher
       run: echo "::add-matcher::.github/problem-matchers/sphinx.json"
+=======
+>>>>>>> 3.9
     - name: 'Install Dependencies'
       run: sudo ./.github/workflows/posix-deps-apt.sh && sudo apt-get install wamerican
     - name: 'Configure CPython'

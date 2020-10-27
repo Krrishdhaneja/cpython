@@ -756,6 +756,7 @@ _sha512_exec(PyObject *m)
     st->sha384_type = (PyTypeObject *)PyType_FromModuleAndSpec(
         m, &sha512_sha384_type_spec, NULL);
 
+<<<<<<< HEAD
     st->sha512_type = (PyTypeObject *)PyType_FromModuleAndSpec(
         m, &sha512_sha512_type_spec, NULL);
 
@@ -783,6 +784,8 @@ static PyModuleDef_Slot _sha512_slots[] = {
     {0, NULL}
 };
 
+=======
+>>>>>>> 3.9
 static struct PyModuleDef _sha512module = {
         PyModuleDef_HEAD_INIT,
         .m_name = "_sha512",

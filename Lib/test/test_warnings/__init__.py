@@ -1204,7 +1204,11 @@ class EnvironmentVariableTests(BaseTest):
     @unittest.skipUnless(sys.getfilesystemencoding() != 'ascii',
                          'requires non-ascii filesystemencoding')
     def test_nonascii(self):
+<<<<<<< HEAD
         PYTHONWARNINGS="ignore:DeprecationWarning" + os_helper.FS_NONASCII
+=======
+        PYTHONWARNINGS="ignore:DeprecationWarning" + support.FS_NONASCII
+>>>>>>> 3.9
         rc, stdout, stderr = assert_python_ok("-c",
             "import sys; sys.stdout.write(str(sys.warnoptions))",
             PYTHONIOENCODING="utf-8",

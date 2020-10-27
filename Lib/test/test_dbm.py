@@ -35,7 +35,11 @@ def delete_files():
     # we don't know the precise name the underlying database uses
     # so we use glob to locate all names
     for f in glob.glob(glob.escape(_fname) + "*"):
+<<<<<<< HEAD
         os_helper.unlink(f)
+=======
+        test.support.unlink(f)
+>>>>>>> 3.9
 
 
 class AnyDBMTestCase:

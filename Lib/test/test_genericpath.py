@@ -535,9 +535,15 @@ class CommonTest(GenericTest):
 class PathLikeTests(unittest.TestCase):
 
     def setUp(self):
+<<<<<<< HEAD
         self.file_name = os_helper.TESTFN
         self.file_path = FakePath(os_helper.TESTFN)
         self.addCleanup(os_helper.unlink, self.file_name)
+=======
+        self.file_name = support.TESTFN
+        self.file_path = FakePath(support.TESTFN)
+        self.addCleanup(support.unlink, self.file_name)
+>>>>>>> 3.9
         create_file(self.file_name, b"test_genericpath.PathLikeTests")
 
     def assertPathEqual(self, func):

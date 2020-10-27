@@ -53,10 +53,22 @@ PyOS_vsnprintf(char *str, size_t size, const char  *format, va_list va)
 {
     assert(str != NULL);
     assert(size > 0);
+<<<<<<< HEAD
     assert(size <= (INT_MAX - 1));
     assert(format != NULL);
 
     int len;  /* # bytes written, excluding \0 */
+=======
+    assert(format != NULL);
+
+    int len;  /* # bytes written, excluding \0 */
+#if defined(_MSC_VER) || defined(HAVE_SNPRINTF)
+#  define _PyOS_vsnprintf_EXTRA_SPACE 1
+#else
+#  define _PyOS_vsnprintf_EXTRA_SPACE 512
+    char *buffer;
+#endif
+>>>>>>> 3.9
     /* We take a size_t as input but return an int.  Sanity check
      * our input so that it won't cause an overflow in the
      * vsnprintf return value.  */
@@ -67,8 +79,36 @@ PyOS_vsnprintf(char *str, size_t size, const char  *format, va_list va)
 
 #if defined(_MSC_VER)
     len = _vsnprintf(str, size, format, va);
+<<<<<<< HEAD
 #else
     len = vsnprintf(str, size, format, va);
+=======
+#elif defined(HAVE_SNPRINTF)
+    len = vsnprintf(str, size, format, va);
+#else
+    /* Emulate vsnprintf(). */
+    buffer = PyMem_MALLOC(size + _PyOS_vsnprintf_EXTRA_SPACE);
+    if (buffer == NULL) {
+        len = -666;
+        goto Done;
+    }
+
+    len = vsprintf(buffer, format, va);
+    if (len < 0) {
+        /* ignore the error */;
+    }
+    else if ((size_t)len >= size + _PyOS_vsnprintf_EXTRA_SPACE) {
+        _Py_FatalErrorFunc(__func__, "Buffer overflow");
+    }
+    else {
+        const size_t to_copy = (size_t)len < size ?
+                                (size_t)len : size - 1;
+        assert(to_copy < size);
+        memcpy(str, buffer, to_copy);
+        str[to_copy] = '\0';
+    }
+    PyMem_FREE(buffer);
+>>>>>>> 3.9
 #endif
 
 Done:

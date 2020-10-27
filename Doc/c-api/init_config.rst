@@ -1001,8 +1001,11 @@ Py_GetArgcArgv()
 
    Get the original command line arguments, before Python modified them.
 
+<<<<<<< HEAD
    See also :c:member:`PyConfig.orig_argv` member.
 
+=======
+>>>>>>> 3.9
 
 Multi-Phase Initialization Private Provisional API
 --------------------------------------------------

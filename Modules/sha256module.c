@@ -682,6 +682,7 @@ _sha256_free(void *module)
     _sha256_clear((PyObject *)module);
 }
 
+<<<<<<< HEAD
 static int sha256_exec(PyObject *module)
 {
     _sha256_state *state = _sha256_get_state(module);
@@ -692,6 +693,19 @@ static int sha256_exec(PyObject *module)
     if (state->sha224_type == NULL) {
         return -1;
     }
+=======
+static struct PyModuleDef _sha256module = {
+        PyModuleDef_HEAD_INIT,
+        "_sha256",
+        NULL,
+        -1,
+        SHA_functions,
+        NULL,
+        NULL,
+        NULL,
+        NULL
+};
+>>>>>>> 3.9
 
     state->sha256_type = (PyTypeObject *)PyType_FromModuleAndSpec(
         module, &sha256_type_spec, NULL);

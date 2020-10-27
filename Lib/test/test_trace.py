@@ -1,7 +1,11 @@
 import os
 import sys
+<<<<<<< HEAD
 from test.support import captured_stdout
 from test.support.os_helper import (TESTFN, rmtree, unlink)
+=======
+from test.support import TESTFN, TESTFN_UNICODE, FS_NONASCII, rmtree, unlink, captured_stdout
+>>>>>>> 3.9
 from test.support.script_helper import assert_python_ok, assert_python_failure
 import textwrap
 import unittest

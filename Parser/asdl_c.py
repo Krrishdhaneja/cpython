@@ -911,7 +911,11 @@ static PyObject* ast2obj_list(astmodulestate *state, asdl_seq *seq, PyObject* (*
     if (!result)
         return NULL;
     for (i = 0; i < n; i++) {
+<<<<<<< HEAD
         value = func(state, asdl_seq_GET_UNTYPED(seq, i));
+=======
+        value = func(state, asdl_seq_GET(seq, i));
+>>>>>>> 3.9
         if (!value) {
             Py_DECREF(result);
             return NULL;
@@ -1155,6 +1159,28 @@ PyInit__ast(void)
         self.emit("return -1;", 2)
         self.emit('}', 1)
         self.emit("Py_INCREF(state->%s_type);" % name, 1)
+<<<<<<< HEAD
+=======
+
+
+_SPECIALIZED_SEQUENCES = ('stmt', 'expr')
+
+def find_sequence(fields, doing_specialization):
+    """Return True if any field uses a sequence."""
+    for f in fields:
+        if f.seq:
+            if not doing_specialization:
+                return True
+            if str(f.type) not in _SPECIALIZED_SEQUENCES:
+                return True
+    return False
+
+def has_sequence(types, doing_specialization):
+    for t in types:
+        if find_sequence(t.fields, doing_specialization):
+            return True
+    return False
+>>>>>>> 3.9
 
 
 class StaticVisitor(PickleVisitor):
@@ -1270,8 +1296,14 @@ class ObjVisitor(PickleVisitor):
                           depth+2, reflow=False)
                 self.emit("}", depth)
             else:
+<<<<<<< HEAD
                 self.emit("value = ast2obj_list(state, (asdl_seq*)%s, ast2obj_%s);" % (value, field.type), depth)
         else:
+=======
+                self.emit("value = ast2obj_list(state, %s, ast2obj_%s);" % (value, field.type), depth)
+        else:
+            ctype = get_c_type(field.type)
+>>>>>>> 3.9
             self.emit("value = ast2obj_%s(state, %s);" % (field.type, value), depth, reflow=False)
 
 
@@ -1391,6 +1423,7 @@ get_global_ast_state(void)
         return NULL;
     }
     return state;
+<<<<<<< HEAD
 }
 
 static astmodulestate*
@@ -1405,6 +1438,22 @@ get_ast_state(PyObject* Py_UNUSED(module))
 
 void _PyAST_Fini(PyThreadState *tstate)
 {
+=======
+}
+
+static astmodulestate*
+get_ast_state(PyObject* Py_UNUSED(module))
+{
+    astmodulestate* state = get_global_ast_state();
+    // get_ast_state() must only be called after _ast module is imported,
+    // and astmodule_exec() calls init_types()
+    assert(state != NULL);
+    return state;
+}
+
+void _PyAST_Fini()
+{
+>>>>>>> 3.9
     astmodulestate* state = &global_ast_state;
 """)
     for s in module_state:

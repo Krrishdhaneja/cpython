@@ -9,18 +9,29 @@ from test.support import import_helper
 from test.support import os_helper
 from test.support import warnings_helper
 
+<<<<<<< HEAD
 
 with warnings_helper.check_warnings(('', DeprecationWarning)):
     binhex = import_helper.import_fresh_module('binhex')
+=======
+with support.check_warnings(('', DeprecationWarning)):
+    binhex = support.import_fresh_module('binhex')
+>>>>>>> 3.9
 
 
 class BinHexTestCase(unittest.TestCase):
 
     def setUp(self):
         # binhex supports only file names encodable to Latin1
+<<<<<<< HEAD
         self.fname1 = os_helper.TESTFN_ASCII + "1"
         self.fname2 = os_helper.TESTFN_ASCII + "2"
         self.fname3 = os_helper.TESTFN_ASCII + "very_long_filename__very_long_filename__very_long_filename__very_long_filename__"
+=======
+        self.fname1 = support.TESTFN_ASCII + "1"
+        self.fname2 = support.TESTFN_ASCII + "2"
+        self.fname3 = support.TESTFN_ASCII + "very_long_filename__very_long_filename__very_long_filename__very_long_filename__"
+>>>>>>> 3.9
 
     def tearDown(self):
         os_helper.unlink(self.fname1)

@@ -3742,7 +3742,11 @@ class PathTConverterTests(unittest.TestCase):
         if os.name == 'nt':
             bytes_fspath = bytes_filename = None
         else:
+<<<<<<< HEAD
             bytes_filename = os.fsencode(os_helper.TESTFN)
+=======
+            bytes_filename = os.fsencode(support.TESTFN)
+>>>>>>> 3.9
             bytes_fspath = FakePath(bytes_filename)
         fd = os.open(FakePath(str_filename), os.O_WRONLY|os.O_CREAT)
         self.addCleanup(os_helper.unlink, os_helper.TESTFN)

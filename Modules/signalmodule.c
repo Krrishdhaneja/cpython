@@ -1835,7 +1835,10 @@ PyOS_InterruptOccurred(void)
 }
 
 
+<<<<<<< HEAD
 #ifdef HAVE_FORK
+=======
+>>>>>>> 3.9
 static void
 _clear_pending_signals(void)
 {

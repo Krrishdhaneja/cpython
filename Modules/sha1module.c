@@ -565,6 +565,7 @@ _sha1_exec(PyObject *module)
 }
 
 
+<<<<<<< HEAD
 /* Initialize this module. */
 
 static PyModuleDef_Slot _sha1_slots[] = {
@@ -572,6 +573,8 @@ static PyModuleDef_Slot _sha1_slots[] = {
     {0, NULL}
 };
 
+=======
+>>>>>>> 3.9
 static struct PyModuleDef _sha1module = {
         PyModuleDef_HEAD_INIT,
         .m_name = "_sha1",

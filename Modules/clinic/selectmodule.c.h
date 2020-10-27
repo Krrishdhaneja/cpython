@@ -1179,4 +1179,8 @@ exit:
 #ifndef SELECT_KQUEUE_CONTROL_METHODDEF
     #define SELECT_KQUEUE_CONTROL_METHODDEF
 #endif /* !defined(SELECT_KQUEUE_CONTROL_METHODDEF) */
+<<<<<<< HEAD
 /*[clinic end generated code: output=162f4f4efa850416 input=a9049054013a1b77]*/
+=======
+/*[clinic end generated code: output=ef42c3485a8fe3a0 input=a9049054013a1b77]*/
+>>>>>>> 3.9

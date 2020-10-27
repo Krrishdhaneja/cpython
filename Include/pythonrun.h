@@ -33,6 +33,33 @@ PyAPI_FUNC(int) PyRun_InteractiveLoopFlags(
     PyCompilerFlags *flags);
 
 
+<<<<<<< HEAD
+=======
+#ifndef PyParser_SimpleParseString
+#define PyParser_SimpleParseString(S, B) \
+    PyParser_SimpleParseStringFlags(S, B, 0)
+#define PyParser_SimpleParseFile(FP, S, B) \
+    PyParser_SimpleParseFileFlags(FP, S, B, 0)
+#endif
+
+#ifndef Py_BUILD_CORE
+Py_DEPRECATED(3.9)
+#endif
+PyAPI_FUNC(struct _node *) PyParser_SimpleParseStringFlags(const char *, int, int);
+#if !defined(Py_LIMITED_API) || Py_LIMITED_API+0 >= 0x03030000
+#ifndef Py_BUILD_CORE
+Py_DEPRECATED(3.9)
+#endif
+PyAPI_FUNC(struct _node *) PyParser_SimpleParseStringFlagsFilename(const char *,
+                                                                   const char *,
+                                                                   int, int);
+#endif
+#ifndef Py_BUILD_CORE
+Py_DEPRECATED(3.9)
+#endif
+PyAPI_FUNC(struct _node *) PyParser_SimpleParseFileFlags(FILE *, const char *, int, int);
+#ifndef Py_LIMITED_API
+>>>>>>> 3.9
 PyAPI_FUNC(PyObject *) PyRun_StringFlags(const char *, int, PyObject *,
                                          PyObject *, PyCompilerFlags *);
 

@@ -250,6 +250,7 @@ static uint64_t pydict_global_version = 0;
 
 #include "clinic/dictobject.c.h"
 
+<<<<<<< HEAD
 
 static struct _Py_dict_state *
 get_dict_state(void)
@@ -257,6 +258,14 @@ get_dict_state(void)
     PyInterpreterState *interp = _PyInterpreterState_GET();
     return &interp->dict_state;
 }
+=======
+#if PyDict_MAXFREELIST > 0
+static PyDictObject *free_list[PyDict_MAXFREELIST];
+static int numfree = 0;
+static PyDictKeysObject *keys_free_list[PyDict_MAXFREELIST];
+static int numfreekeys = 0;
+#endif
+>>>>>>> 3.9
 
 
 void

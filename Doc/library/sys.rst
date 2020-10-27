@@ -92,11 +92,19 @@ always available.
    optional arguments with more information about the event.  The
    number and types of arguments for a given event are considered a
    public and stable API and should not be modified between releases.
+<<<<<<< HEAD
 
    For example, one auditing event is named ``os.chdir``. This event has
    one argument called *path* that will contain the requested new
    working directory.
 
+=======
+
+   For example, one auditing event is named ``os.chdir``. This event has
+   one argument called *path* that will contain the requested new
+   working directory.
+
+>>>>>>> 3.9
    :func:`sys.audit` will call the existing auditing hooks, passing
    the event name and arguments, and will re-raise the first exception
    from any hook. In general, if an exception is raised, it should not

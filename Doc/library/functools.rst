@@ -83,6 +83,7 @@ The :mod:`functools` module defines the following functions:
    read-only proxies for the class namespace), and those that specify
    ``__slots__`` without including ``__dict__`` as one of the defined slots
    (as such classes don't provide a ``__dict__`` attribute at all).
+<<<<<<< HEAD
 
    If a mutable mapping is not available or if space-efficient key sharing
    is desired, an effect similar to :func:`cached_property` can be achieved
@@ -97,6 +98,22 @@ The :mod:`functools` module defines the following functions:
            def stdev(self):
                return statistics.stdev(self._data)
 
+=======
+
+   If a mutable mapping is not available or if space-efficient key sharing
+   is desired, an effect similar to :func:`cached_property` can be achieved
+   by a stacking :func:`property` on top of :func:`cache`::
+
+       class DataSet:
+           def __init__(self, sequence_of_numbers):
+               self._data = sequence_of_numbers
+
+           @property
+           @cache
+           def stdev(self):
+               return statistics.stdev(self._data)
+
+>>>>>>> 3.9
    .. versionadded:: 3.8
 
 

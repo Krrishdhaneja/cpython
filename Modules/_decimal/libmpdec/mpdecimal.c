@@ -3879,6 +3879,7 @@ mpd_qdiv(mpd_t *q, const mpd_t *a, const mpd_t *b,
     MPD_NEW_STATIC(aa,0,0,0,0);
     MPD_NEW_STATIC(bb,0,0,0,0);
     uint32_t xstatus = 0;
+<<<<<<< HEAD
 
     if (q == a) {
         if (!mpd_qcopy(&aa, a, status)) {
@@ -3896,6 +3897,25 @@ mpd_qdiv(mpd_t *q, const mpd_t *a, const mpd_t *b,
         b = &bb;
     }
 
+=======
+
+    if (q == a) {
+        if (!mpd_qcopy(&aa, a, status)) {
+            mpd_seterror(q, MPD_Malloc_error, status);
+            goto out;
+        }
+        a = &aa;
+    }
+
+    if (q == b) {
+        if (!mpd_qcopy(&bb, b, status)) {
+            mpd_seterror(q, MPD_Malloc_error, status);
+            goto out;
+        }
+        b = &bb;
+    }
+
+>>>>>>> 3.9
     _mpd_qdiv(SET_IDEAL_EXP, q, a, b, ctx, &xstatus);
 
     if (xstatus & (MPD_Malloc_error|MPD_Division_impossible)) {
@@ -8025,6 +8045,7 @@ mpd_qsqrt(mpd_t *result, const mpd_t *a, const mpd_context_t *ctx,
 {
     MPD_NEW_STATIC(aa,0,0,0,0);
     uint32_t xstatus = 0;
+<<<<<<< HEAD
 
     if (result == a) {
         if (!mpd_qcopy(&aa, a, status)) {
@@ -8036,6 +8057,19 @@ mpd_qsqrt(mpd_t *result, const mpd_t *a, const mpd_context_t *ctx,
 
     _mpd_qsqrt(result, a, ctx, &xstatus);
 
+=======
+
+    if (result == a) {
+        if (!mpd_qcopy(&aa, a, status)) {
+            mpd_seterror(result, MPD_Malloc_error, status);
+            goto out;
+        }
+        a = &aa;
+    }
+
+    _mpd_qsqrt(result, a, ctx, &xstatus);
+
+>>>>>>> 3.9
     if (xstatus & (MPD_Malloc_error|MPD_Division_impossible)) {
         /* The above conditions can occur at very high context precisions
          * if intermediate values get too large. Retry the operation with
@@ -8656,6 +8690,7 @@ mpd_qimport_u32(mpd_t *result,
     mpd_qresize(result, result->len, status);
     mpd_qfinalize(result, ctx, status);
 }
+<<<<<<< HEAD
 
 
 /******************************************************************************/
@@ -9008,3 +9043,5 @@ mpd_as_uint128_triple(const mpd_t *a)
 
     return triple;
 }
+=======
+>>>>>>> 3.9

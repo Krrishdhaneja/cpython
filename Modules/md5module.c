@@ -569,6 +569,7 @@ md5_exec(PyObject *m)
 {
     MD5State *st = md5_get_state(m);
 
+<<<<<<< HEAD
     st->md5_type = (PyTypeObject *)PyType_FromModuleAndSpec(
         m, &md5_type_spec, NULL);
 
@@ -591,6 +592,8 @@ static PyModuleDef_Slot _md5_slots[] = {
 };
 
 
+=======
+>>>>>>> 3.9
 static struct PyModuleDef _md5module = {
         PyModuleDef_HEAD_INIT,
         .m_name = "_md5",

@@ -629,9 +629,15 @@ class PathLikeTests(unittest.TestCase):
     path = posixpath
 
     def setUp(self):
+<<<<<<< HEAD
         self.file_name = os_helper.TESTFN
         self.file_path = FakePath(os_helper.TESTFN)
         self.addCleanup(os_helper.unlink, self.file_name)
+=======
+        self.file_name = support.TESTFN
+        self.file_path = FakePath(support.TESTFN)
+        self.addCleanup(support.unlink, self.file_name)
+>>>>>>> 3.9
         with open(self.file_name, 'xb', 0) as file:
             file.write(b"test_posixpath.PathLikeTests")
 

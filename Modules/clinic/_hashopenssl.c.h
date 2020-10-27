@@ -1417,4 +1417,8 @@ exit:
 #ifndef _HASHLIB_GET_FIPS_MODE_METHODDEF
     #define _HASHLIB_GET_FIPS_MODE_METHODDEF
 #endif /* !defined(_HASHLIB_GET_FIPS_MODE_METHODDEF) */
+<<<<<<< HEAD
 /*[clinic end generated code: output=2bbd6159493f44ea input=a9049054013a1b77]*/
+=======
+/*[clinic end generated code: output=b6b280e46bf0b139 input=a9049054013a1b77]*/
+>>>>>>> 3.9

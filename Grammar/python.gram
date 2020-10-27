@@ -97,8 +97,13 @@ assignment[stmt_ty]:
         ) }
     | a=('(' b=single_target ')' { b }
          | single_subscript_attribute_target) ':' b=expression c=['=' d=annotated_rhs { d }] {
+<<<<<<< HEAD
         CHECK_VERSION(stmt_ty, 6, "Variable annotations syntax is", _Py_AnnAssign(a, b, c, 0, EXTRA)) }
     | a[asdl_expr_seq*]=(z=star_targets '=' { z })+ b=(yield_expr | star_expressions) !'=' tc=[TYPE_COMMENT] {
+=======
+        CHECK_VERSION(6, "Variable annotations syntax is", _Py_AnnAssign(a, b, c, 0, EXTRA)) }
+    | a=(z=star_targets '=' { z })+ b=(yield_expr | star_expressions) !'=' tc=[TYPE_COMMENT] {
+>>>>>>> 3.9
          _Py_Assign(a, b, NEW_TYPE_COMMENT(p, tc), EXTRA) }
     | a=single_target b=augassign ~ c=(yield_expr | star_expressions) {
          _Py_AugAssign(a, b->kind, c, EXTRA) }
@@ -143,10 +148,17 @@ import_from[stmt_ty]:
 import_from_targets[asdl_alias_seq*]:
     | '(' a=import_from_as_names [','] ')' { a }
     | import_from_as_names !','
+<<<<<<< HEAD
     | '*' { (asdl_alias_seq*)_PyPegen_singleton_seq(p, CHECK(alias_ty, _PyPegen_alias_for_star(p))) }
     | invalid_import_from_targets
 import_from_as_names[asdl_alias_seq*]:
     | a[asdl_alias_seq*]=','.import_from_as_name+ { a }
+=======
+    | '*' { _PyPegen_singleton_seq(p, CHECK(_PyPegen_alias_for_star(p))) }
+    | invalid_import_from_targets
+import_from_as_names[asdl_seq*]:
+    | a=','.import_from_as_name+ { a }
+>>>>>>> 3.9
 import_from_as_name[alias_ty]:
     | a=NAME b=['as' z=NAME { z }] { _Py_alias(a->v.Name.id,
                                                (b) ? ((expr_ty) b)->v.Name.id : NULL,
@@ -178,7 +190,11 @@ for_stmt[stmt_ty]:
     | 'for' t=star_targets 'in' ~ ex=star_expressions ':' tc=[TYPE_COMMENT] b=block el=[else_block] {
         _Py_For(t, ex, b, el, NEW_TYPE_COMMENT(p, tc), EXTRA) }
     | ASYNC 'for' t=star_targets 'in' ~ ex=star_expressions ':' tc=[TYPE_COMMENT] b=block el=[else_block] {
+<<<<<<< HEAD
         CHECK_VERSION(stmt_ty, 5, "Async for loops are", _Py_AsyncFor(t, ex, b, el, NEW_TYPE_COMMENT(p, tc), EXTRA)) }
+=======
+        CHECK_VERSION(5, "Async for loops are", _Py_AsyncFor(t, ex, b, el, NEW_TYPE_COMMENT(p, tc), EXTRA)) }
+>>>>>>> 3.9
     | invalid_for_target
 
 with_stmt[stmt_ty]:
@@ -326,7 +342,11 @@ star_named_expression[expr_ty]:
     | '*' a=bitwise_or { _Py_Starred(a, Load, EXTRA) }
     | named_expression
 named_expression[expr_ty]:
+<<<<<<< HEAD
     | a=NAME ':=' ~ b=expression { _Py_NamedExpr(CHECK(expr_ty, _PyPegen_set_expr_context(p, a, Store)), b, EXTRA) }
+=======
+    | a=NAME ':=' ~ b=expression { _Py_NamedExpr(CHECK(_PyPegen_set_expr_context(p, a, Store)), b, EXTRA) }
+>>>>>>> 3.9
     | expression !':='
     | invalid_named_expression
 
@@ -343,8 +363,12 @@ expression[expr_ty] (memo):
     | lambdef
 
 lambdef[expr_ty]:
+<<<<<<< HEAD
     | 'lambda' a=[lambda_params] ':' b=expression {
         _Py_Lambda((a) ? a : CHECK(arguments_ty, _PyPegen_empty_arguments(p)), b, EXTRA) }
+=======
+    | 'lambda' a=[lambda_params] ':' b=expression { _Py_Lambda((a) ? a : CHECK(_PyPegen_empty_arguments(p)), b, EXTRA) }
+>>>>>>> 3.9
 
 lambda_params[arguments_ty]:
     | invalid_lambda_parameters
@@ -496,6 +520,10 @@ atom[expr_ty]:
     | 'True' { _Py_Constant(Py_True, NULL, EXTRA) }
     | 'False' { _Py_Constant(Py_False, NULL, EXTRA) }
     | 'None' { _Py_Constant(Py_None, NULL, EXTRA) }
+<<<<<<< HEAD
+=======
+    | '__peg_parser__' { RAISE_SYNTAX_ERROR("You found it!") }
+>>>>>>> 3.9
     | &STRING strings
     | NUMBER
     | &'(' (tuple | group | genexp)
@@ -524,10 +552,14 @@ setcomp[expr_ty]:
     | invalid_comprehension
 dict[expr_ty]:
     | '{' a=[double_starred_kvpairs] '}' {
+<<<<<<< HEAD
         _Py_Dict(
             CHECK(asdl_expr_seq*, _PyPegen_get_keys(p, a)),
             CHECK(asdl_expr_seq*, _PyPegen_get_values(p, a)),
             EXTRA) }
+=======
+        _Py_Dict(CHECK(_PyPegen_get_keys(p, a)), CHECK(_PyPegen_get_values(p, a)), EXTRA) }
+>>>>>>> 3.9
 dictcomp[expr_ty]:
     | '{' a=kvpair b=for_if_clauses '}' { _Py_DictComp(a->key, a->value, b, EXTRA) }
     | invalid_dict_comprehension
@@ -536,12 +568,21 @@ double_starred_kvpair[KeyValuePair*]:
     | '**' a=bitwise_or { _PyPegen_key_value_pair(p, NULL, a) }
     | kvpair
 kvpair[KeyValuePair*]: a=expression ':' b=expression { _PyPegen_key_value_pair(p, a, b) }
+<<<<<<< HEAD
 for_if_clauses[asdl_comprehension_seq*]:
     | a[asdl_comprehension_seq*]=for_if_clause+ { a }
 for_if_clause[comprehension_ty]:
     | ASYNC 'for' a=star_targets 'in' ~ b=disjunction c[asdl_expr_seq*]=('if' z=disjunction { z })* {
         CHECK_VERSION(comprehension_ty, 6, "Async comprehensions are", _Py_comprehension(a, b, c, 1, p->arena)) }
     | 'for' a=star_targets 'in' ~ b=disjunction c[asdl_expr_seq*]=('if' z=disjunction { z })* {
+=======
+for_if_clauses[asdl_seq*]:
+    | for_if_clause+
+for_if_clause[comprehension_ty]:
+    | ASYNC 'for' a=star_targets 'in' ~ b=disjunction c=('if' z=disjunction { z })* {
+        CHECK_VERSION(6, "Async comprehensions are", _Py_comprehension(a, b, c, 1, p->arena)) }
+    | 'for' a=star_targets 'in' ~ b=disjunction c=('if' z=disjunction { z })* {
+>>>>>>> 3.9
         _Py_comprehension(a, b, c, 0, p->arena) }
     | invalid_for_target
 
@@ -553,7 +594,11 @@ arguments[expr_ty] (memo):
     | a=args [','] &')' { a }
     | invalid_arguments
 args[expr_ty]:
+<<<<<<< HEAD
     | a[asdl_expr_seq*]=','.(starred_expression | named_expression !'=')+ b=[',' k=kwargs {k}] { _PyPegen_collect_call_seqs(p, a, b, EXTRA) }
+=======
+    | a=','.(starred_expression | named_expression !'=')+ b=[',' k=kwargs {k}] { _PyPegen_collect_call_seqs(p, a, b, EXTRA) }
+>>>>>>> 3.9
     | a=kwargs { _Py_Call(_PyPegen_dummy_name(p),
                           CHECK_NULL_ALLOWED(asdl_expr_seq*, _PyPegen_seq_extract_starred_exprs(p, a)),
                           CHECK_NULL_ALLOWED(asdl_keyword_seq*, _PyPegen_seq_delete_starred_exprs(p, a)),
@@ -601,7 +646,11 @@ single_subscript_attribute_target[expr_ty]:
     | a=t_primary '.' b=NAME !t_lookahead { _Py_Attribute(a, b->v.Name.id, Store, EXTRA) }
     | a=t_primary '[' b=slices ']' !t_lookahead { _Py_Subscript(a, b, Store, EXTRA) }
 
+<<<<<<< HEAD
 del_targets[asdl_expr_seq*]: a[asdl_expr_seq*]=','.del_target+ [','] { a }
+=======
+del_targets[asdl_seq*]: a=','.del_target+ [','] { a }
+>>>>>>> 3.9
 del_target[expr_ty] (memo):
     | a=t_primary '.' b=NAME !t_lookahead { _Py_Attribute(a, b->v.Name.id, Del, EXTRA) }
     | a=t_primary '[' b=slices ']' !t_lookahead { _Py_Subscript(a, b, Del, EXTRA) }

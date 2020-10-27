@@ -981,7 +981,11 @@ class _TestMboxMMDF(_TestSingleFile):
         self._box.close()
         self._delete_recursively(self._path)
         for lock_remnant in glob.glob(glob.escape(self._path) + '.*'):
+<<<<<<< HEAD
             os_helper.unlink(lock_remnant)
+=======
+            support.unlink(lock_remnant)
+>>>>>>> 3.9
 
     def assertMailboxEmpty(self):
         with open(self._path) as f:
@@ -1313,7 +1317,11 @@ class TestBabyl(_TestSingleFile, unittest.TestCase):
         self._box.close()
         self._delete_recursively(self._path)
         for lock_remnant in glob.glob(glob.escape(self._path) + '.*'):
+<<<<<<< HEAD
             os_helper.unlink(lock_remnant)
+=======
+            support.unlink(lock_remnant)
+>>>>>>> 3.9
 
     def test_labels(self):
         # Get labels from the mailbox

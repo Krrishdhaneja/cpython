@@ -1269,7 +1269,11 @@ class PdbTestCase(unittest.TestCase):
         return self._run_pdb(['-m', self.module_name], commands)
 
     def _assert_find_function(self, file_content, func_name, expected):
+<<<<<<< HEAD
         with open(os_helper.TESTFN, 'wb') as f:
+=======
+        with open(support.TESTFN, 'wb') as f:
+>>>>>>> 3.9
             f.write(file_content)
 
         expected = None if not expected else (

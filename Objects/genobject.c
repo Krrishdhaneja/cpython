@@ -204,6 +204,10 @@ gen_send_ex2(PyGenObject *gen, PyObject *arg, PyObject **presult,
     assert(f->f_back == NULL);
     f->f_back = tstate->frame;
 
+<<<<<<< HEAD
+=======
+    gen->gi_running = 1;
+>>>>>>> 3.9
     gen->gi_exc_state.previous_item = tstate->exc_info;
     tstate->exc_info = &gen->gi_exc_state;
 
@@ -459,6 +463,10 @@ _gen_throw(PyGenObject *gen, int close_on_genexit,
             PyThreadState *tstate = _PyThreadState_GET();
             PyFrameObject *f = tstate->frame;
 
+<<<<<<< HEAD
+=======
+            gen->gi_running = 1;
+>>>>>>> 3.9
             /* Since we are fast-tracking things by skipping the eval loop,
                we need to update the current frame so the stack trace
                will be reported correctly to the user. */
@@ -471,8 +479,13 @@ _gen_throw(PyGenObject *gen, int close_on_genexit,
             gen->gi_frame->f_state = FRAME_EXECUTING;
             ret = _gen_throw((PyGenObject *)yf, close_on_genexit,
                              typ, val, tb);
+<<<<<<< HEAD
             gen->gi_frame->f_state = state;
             tstate->frame = f;
+=======
+            tstate->frame = f;
+            gen->gi_running = 0;
+>>>>>>> 3.9
         } else {
             /* `yf` is an iterator or a coroutine-like object. */
             PyObject *meth;
